@@ -17,7 +17,7 @@ class SchoolFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'address' => $this->faker->address
         ];
     }
 }

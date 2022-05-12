@@ -11,4 +11,14 @@ class Lesson extends Model
 
     protected $table = 'lessons';
 
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'teacher_id');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
 }

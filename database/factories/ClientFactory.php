@@ -16,8 +16,13 @@ class ClientFactory extends Factory
      */
     public function definition()
     {
+        $array = ['inst', 'facebook', 'friend', 'website'];
         return [
-            //
+            'name' => $this->faker->firstName,
+            'surname' => $this->faker->lastName,
+            'phone' => $this->faker->phoneNumber,
+            'advertising' => $array[array_rand(['inst', 'facebook', 'friend', 'website'], 1)],
+            'status_id' => rand(1,2),
         ];
     }
 }

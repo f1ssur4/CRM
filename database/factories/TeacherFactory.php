@@ -17,7 +17,10 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->firstName,
+            'surname' => $this->faker->lastName,
+            'phone' => $this->faker->phoneNumber,
+            'art_id' => rand(1,10)
         ];
     }
 }

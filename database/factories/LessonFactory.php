@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class LessonFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'client_id' => rand(1,11),
+            'teacher_id' => rand(1,15),
+            'startTime' => $this->faker->dateTime
         ];
     }
 }

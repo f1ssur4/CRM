@@ -10,4 +10,9 @@ class Art extends Model
     use HasFactory;
 
     protected $table = 'arts';
+
+    public function school()
+    {
+        return $this->belongsTo(School::class, 'school_id');
+    }
 }
