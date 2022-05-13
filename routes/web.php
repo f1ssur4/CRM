@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,27 +14,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.main');
 });
 
-Route::get('/tasks', function () {
-    return 'tasks';
-});
+Route::get('/tasks', [TaskController::class, 'index']);
 
 Route::get('/lessons', function () {
-    return 'lessons';
+    return \App\Models\Lesson::all();
 });
 
 Route::get('/clients', function () {
-    return 'clients-list';
+    return \App\Models\Client::all();
 });
 
 Route::get('/teachers', function () {
-    return 'teachers-list';
+    return \App\Models\Teacher::all();
 });
 
 Route::get('/arts', function () {
-    return 'arts';
+    return \App\Models\Art::all();
 });
 
 Route::get('/statistics', function () {
