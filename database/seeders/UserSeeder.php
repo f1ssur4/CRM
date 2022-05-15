@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             DB::table('users')->insert([
                 'login' => 'admin' . $i,
                 'password' => Hash::make('admin' . $i),
-                'color' => 'color' . $i
+//                'color' => 'color' . $i
             ]);
         };
     }

@@ -33,9 +33,17 @@
                         <a class="nav-link" href="/lessons">Lessons</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/statistic">Statistic</a>
+                        <a class="nav-link" href="/statistics">Statistic</a>
+                    </li>
+
+                </ul>
+                @if(\Illuminate\Support\Facades\Auth::check())
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position: absolute; right: 10px">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
                     </li>
                 </ul>
+                @endif
             </div>
         </div>
     </nav>

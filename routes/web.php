@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,37 +17,63 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::name('user.')->group(function () {
-
+    /*
+     * Login
+     */
     Route::get('/login', function () {
-        return view('login');
-    });
+        if (!Auth::check()) {
+            return view('login');
+        }
+        return redirect(\route('/'));
+    })->name('login');
 
-    Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login']);
+    Route::post('/login', [UserController::class, 'login'])->name('login');
+    /*
+     * Create user
+     */
+    Route::get('/create', function () {
+        return view('create');
+    })->middleware('authorize')->name('create');
+
+    Route::post('/create', [UserController::class, 'create']);
+    /*
+    * Logout
+    */
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect(route('user.login'))->withErrors([
+            'successLogout' => 'You are successful logout'
+        ]);
+    })->middleware('auth')->name('logout');
 });
 
-Route::get('/', function () {
-    return view('layouts.main');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('main');
+    })->name('/');
+
+    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+
+    Route::get('/lessons', function () {
+        //
+    })->name('lessons');
+
+    Route::get('/clients', function () {
+        //
+    })->name('clients');
+
+    Route::get('/teachers', function () {
+        //
+    })->name('teachers');
+
+    Route::get('/arts', function () {
+        //
+    })->name('arts');
+
+    Route::get('/statistics', function () {
+        //
+    })->name('statistics');
 });
 
-Route::get('/tasks', [TaskController::class, 'index']);
-
-Route::get('/lessons', function () {
-    //
-});
-
-Route::get('/clients', function () {
-    //
-});
-
-Route::get('/teachers', function () {
-    //
-});
-
-Route::get('/arts', function () {
-    //
-});
-
-Route::get('/statistics', function () {
-    //
-});
 

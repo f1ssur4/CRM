@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Closure;
 
 class Authenticate
 {
@@ -14,8 +14,13 @@ class Authenticate
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    public function redirectTo(Request $request, \Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        //
+        if (Auth::check()){
+            return $next($request);
+        }
+        return redirect(route('user.login'))->withErrors([
+            'errorLoginOrRegistration' => 'First you need to login'
+        ]);
     }
 }
