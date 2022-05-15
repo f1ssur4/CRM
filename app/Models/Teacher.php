@@ -11,6 +11,8 @@ class Teacher extends Model
 
     protected $table = 'teachers';
 
+    public $timestamps = true;
+
     public function art()
     {
         return $this->belongsTo(Art::class, 'art_id');

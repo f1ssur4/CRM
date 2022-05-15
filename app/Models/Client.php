@@ -11,6 +11,8 @@ class Client extends Model
 
     protected $table = 'clients';
 
+    public $timestamps = true;
+
     public function status()
     {
         return $this->belongsTo(Status::class, 'status_id');

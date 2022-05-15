@@ -9,6 +9,7 @@ use App\Models\School;
 use App\Models\Status;
 use App\Models\Task;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
         Teacher::factory(15)->create();
         Client::factory(11)->create();
         Lesson::factory(3)->create();
+        $this->call([UserSeeder::class]);
     }
 }

@@ -11,6 +11,8 @@ class Lesson extends Model
 
     protected $table = 'lessons';
 
+    public $timestamps = true;
+
     public function teacher()
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');

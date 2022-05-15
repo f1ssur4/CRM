@@ -3,8 +3,10 @@
 
 @section('content')
 @php $i = 1;@endphp
+
 <p><h1 style="margin-left: 10px">Table of daily tasks</h1>
 Цвет Anna @php echo session('colorAnna')@endphp
+
 <table class="table" style="margin-top: 2em">
     <thead>
     <tr>

@@ -10,4 +10,6 @@ class School extends Model
     use HasFactory;
 
     protected $table = 'schools';
+
+    public $timestamps = true;
 }

@@ -11,6 +11,8 @@ class Art extends Model
 
     protected $table = 'arts';
 
+    public $timestamps = true;
+
     public function school()
     {
         return $this->belongsTo(School::class, 'school_id');

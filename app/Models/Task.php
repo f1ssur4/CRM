@@ -11,4 +11,6 @@ class Task extends Model
 
     protected $table = 'tasks';
 
+    public $timestamps = true;
+
 }

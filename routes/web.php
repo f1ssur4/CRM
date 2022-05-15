@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\TaskController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,15 @@ use \App\Http\Controllers\TaskController;
 |
 */
 
+Route::name('user.')->group(function () {
+
+    Route::get('/login', function () {
+        return view('login');
+    });
+
+    Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login']);
+});
+
 Route::get('/', function () {
     return view('layouts.main');
 });
@@ -20,21 +30,22 @@ Route::get('/', function () {
 Route::get('/tasks', [TaskController::class, 'index']);
 
 Route::get('/lessons', function () {
-    return \App\Models\Lesson::all();
+    //
 });
 
 Route::get('/clients', function () {
-    return \App\Models\Client::all();
+    //
 });
 
 Route::get('/teachers', function () {
-    return \App\Models\Teacher::all();
+    //
 });
 
 Route::get('/arts', function () {
-    return \App\Models\Art::all();
+    //
 });
 
 Route::get('/statistics', function () {
-    return 'statistics';
+    //
 });
+
