@@ -29,33 +29,41 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/tasks">Tasks</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/teachers">Teachers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/clients">Clients</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/lessons">Lessons</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/statistics">Statistic</a>
-                    </li>
-                    @if(!\Illuminate\Support\Facades\Auth::check())
+                    @if(\Illuminate\Support\Facades\Gate::check('view'))
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
+                            <a class="nav-link" href="/tasks">Tasks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/teachers">Teachers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/clients">Clients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lessons">Lessons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/statistics">Statistic</a>
                         </li>
                     @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lessons">Lessons</a>
+                        </li>
+                    @endif
+                    @if(\Illuminate\Support\Facades\Auth::check())
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position: absolute; right: 10px">
                             <li class="nav-item">
                                 <h5 class="nav-link"
-                                    style="color: @php echo session()->get('color') @endphp">@php echo session()->get('admin') @endphp</h5>
+                                    style="color: @php echo session()->get('color') @endphp">@php echo session()->get('user') @endphp</h5>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    @else
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position: absolute; right: 10px">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Login</a>
                             </li>
                         </ul>
                     @endif

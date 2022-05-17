@@ -2,10 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use \Illuminate\Support\Facades\Gate;
 
 class Authorize
 {
@@ -18,6 +17,12 @@ class Authorize
      */
     public function handle(Request $request, Closure $next)
     {
-        //
+        if (Gate::check('view')){
+            return $next($request);
+        }
+        return redirect('/')->withErrors([
+            'authorize' => 'У вас нет прав доступа к этой странице'
+        ]);
+
     }
 }
