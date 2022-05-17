@@ -14,16 +14,21 @@
                 @enderror
             </div>
         <label>Password</label>
-        <input class="form-control" id="password" name="password">
+        <input class="form-control" id="password" name="password" type="password">
             @error('password')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
+            <label style="margin-top: 10px">Choose your identification color</label>
+            <p><select size="3" multiple name="color" required>
+                    <option value="red">Red</option>
+                    <option value="black">Black</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                </select></p>
 
-{{--            <label>Color</label>--}}
-{{--        <input class="form-control" id="color" name="color">--}}
-{{--            @error('color')--}}
-{{--            <div class="alert alert-danger">{{ $message }}</div>--}}
-{{--            @enderror--}}
+            @error('color')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
            <p><div class="col-auto" style="margin-left: 350px">
                 <button type="submit" class="btn btn-primary" style="width: 150px">Confirm identity</button>
             </div>

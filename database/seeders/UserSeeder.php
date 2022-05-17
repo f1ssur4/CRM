@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
     {
         for ($i = 1; $i <= 3; $i++) {
             DB::table('users')->insert([
-                'login' => 'admin' . $i,
-                'password' => Hash::make('admin' . $i),
-//                'color' => 'color' . $i
+                'login' => 'user' . $i,
+                'password' => Hash::make('user' . $i),
+                'isAdmin' => rand(0,1),
             ]);
         };
     }

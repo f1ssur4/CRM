@@ -16,12 +16,12 @@ class UserController extends Controller
         $validated = $request->validate([
             'login' => 'required',
             'password' => 'required',
-//            'color' => 'required'
         ]);
 
         if (Auth::attempt($validated)){
             $request->session()->regenerate();
-
+//            $request->session()->put('color', $request->color);   **добавить в middleware авторизации
+//            $request->session()->put('admin', $request->login);   **добавить в middleware авторизации
             return redirect(route('/'));
         }
 
@@ -39,7 +39,6 @@ class UserController extends Controller
         $validated = $request->validate([
             'login' => 'required',
             'password' => 'required',
-//            'color' => 'required'
         ]);
 
         if (Auth::attempt($validated)){
