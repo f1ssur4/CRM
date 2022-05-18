@@ -8,7 +8,7 @@
     @if(\Illuminate\Support\Facades\Gate::check('view'))
         <div style="margin: 10px">
             <label style="margin-top: 10px">Choose your identification color</label>
-            <form action={{ route('admin.data') }} method="POST">
+            <form action={{ route('admins.session_data') }} method="POST">
                 @csrf
                 <p><select size="3" multiple name="color" required>
                         <option value="red">Red</option>

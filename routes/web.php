@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
             return view('create');
         })->name('user.create');
 
-        Route::post('/admin/sessionData', [AdminController::class, 'addSessionData'])->name('admin.data');
+        Route::post('/admins/session_data', [AdminController::class, 'addSessionData'])->name('admins.session_data');
 
         Route::post('/create', [AdminController::class, 'create'])->name('admin.create');
 
