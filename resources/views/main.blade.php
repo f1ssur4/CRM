@@ -23,8 +23,10 @@
             </form>
         </div>
     @endif
-
-    @error('authorize')
+    @error('color_changed')
+    <div class="alert alert-success">{{ $message }}</div>
+    @enderror
+    @error('non_authorize')
     <div class="alert alert-warning">{{ $message }}</div>
     @enderror
 

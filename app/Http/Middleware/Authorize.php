@@ -21,7 +21,7 @@ class Authorize
             return $next($request);
         }
         return redirect('/')->withErrors([
-            'authorize' => 'У вас нет прав доступа к этой странице'
+            'non_authorize' => config('messages.non_authorize')
         ]);
 
     }

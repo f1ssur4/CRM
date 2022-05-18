@@ -23,14 +23,14 @@
                 <td>@php echo $task->content @endphp</td>
                 <td>
                     <div class="rectangle"
-                         style="margin-top: 8px;position: fixed;width: 20px;height: 20px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;background:@php echo session()->get('color') @endphp;"></div>
+                         style="margin-top: 8px;position: fixed;width: 20px;height: 20px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;background:@php session('color') @endphp;"></div>
                 </td>
                 <td>
                     <button class="btn btn-primary">In process</button>
                 </td>
                 <td>
                     <div class="rectangle"
-                         style="margin-top: 8px;position: fixed;width: 20px;height: 20px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;background:@php echo session()->get('color') @endphp;"></div>
+                         style="margin-top: 8px;position: fixed;width: 20px;height: 20px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;background:@php echo session('color') @endphp;"></div>
                 </td>
                 <td>
                     <button class="btn btn-success">Ready</button>

@@ -2,37 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
+use \Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function sessionAdminData(Request $request)
-    {
-        $request->session()->put('color', $request->color);
 
-        return redirect(route('/'));
+    public function addSessionData(Request $request)
+    {
+        session(['color' => $request->color]);
+        return $this->redirectWithSuccess();
     }
 
-//    public function create(Request $request)
-//    {
-//        if (Auth::check()){
-//            return redirect(route('/'));
-//        }
-//
-//        $validated = $request->validate([
-//            'login' => 'required',
-//            'password' => 'required',
-//        ]);
-//
-//        if (Auth::attempt($validated)){
-//            $request->session()->regenerate();
-//
-//            return redirect(route('/'));
-//        }
-//
-//        return back()->withErrors([
-//            'login' => 'Wrong login or password',
-//        ])->onlyInput('login');
-//    }
+    public function create(UserRequest $userRequest)
+    {
+        return User::where('login', $userRequest->login)->exists()
+            ? $this->redirectWithError()
+            : $this->save($userRequest);
+    }
+
+    private function save(UserRequest $userRequest)
+    {
+        return User::create($userRequest->post())
+            ? $this->redirectWithSuccess()
+            : $this->redirectWithError();
+    }
+
+    private function redirectWithSuccess()
+    {
+        return back()->withErrors([
+            'user_created' => config('messages.user_created'),
+            'color_changed' => config('messages.color_changed')
+        ]);
+    }
+
+    private function redirectWithError()
+    {
+        return back()->withErrors([
+            'create_error' => config('messages.create_error')
+        ]);
+    }
+
+
 }

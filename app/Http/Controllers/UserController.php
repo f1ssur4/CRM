@@ -2,31 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function login(Request $request)
+
+    public function login(UserRequest $userRequest)
     {
-        if (Auth::check()){
-            return redirect(route('/'));
-        }
+        return $this->isAuth()
+            ? $this->redirectWithErrorAuth()
+            : $this->authenticate($userRequest);
+    }
 
-        $validated = $request->validate([
-            'login' => 'required',
-            'password' => 'required',
-        ]);
+    private function isAuth(): bool
+    {
+        return Auth::check();
+    }
 
-        if (Auth::attempt($validated)){
-            $request->session()->regenerate();
-            $request->session()->put('user', $request->login);
-            return redirect(route('/'));
-        }
+    private function redirectWithErrorAuth()
+    {
+        return redirect(route('/'));
+    }
 
+    private function authenticate(UserRequest $userRequest)
+    {
+        return Auth::attempt($userRequest->validated())
+            ? $this->redirectSuccessSessionData($userRequest)
+            : $this->redirectWithErrorValidation();
+    }
+
+    private function redirectSuccessSessionData(UserRequest $userRequest)
+    {
+        session()->regenerate();
+        session(['user' => $userRequest->login]);
+        return redirect(route('/'));
+    }
+
+    private function redirectWithErrorValidation()
+    {
         return back()->withErrors([
-            'login' => 'Wrong login or password',
+            'error_validation' => config('messages.error_validation'),
         ])->onlyInput('login');
+    }
+
+    public function logout()
+    {
+        session()->flush();
+        Auth::logout();
+        return redirect(route('user.login'))->withErrors([
+            'success_logout' => config('messages.success_logout')
+        ]);
     }
 
 }

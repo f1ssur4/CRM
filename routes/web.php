@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,13 +45,8 @@ Route::middleware('auth')->group(function () {
         return 123;
     })->name('lessons');
 
-    Route::get('/logout', function () {
-        session()->flush();
-        Auth::logout();
-        return redirect(route('user.login'))->withErrors([
-            'successLogout' => 'You are successful logout'
-        ]);
-    })->name('user.logout');
+    Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+
 
     /*
      * доступ только после аутентификации и авторизации
@@ -62,9 +57,9 @@ Route::middleware('auth')->group(function () {
             return view('create');
         })->name('user.create');
 
-        Route::post('/admin/sessionData', [AdminController::class, 'sessionAdminData'])->name('admin.data');
+        Route::post('/admin/sessionData', [AdminController::class, 'addSessionData'])->name('admin.data');
 
-        Route::post('/create', [UserController::class, 'create'])->name('user.create');
+        Route::post('/create', [AdminController::class, 'create'])->name('admin.create');
 
         Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
 
