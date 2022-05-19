@@ -13,4 +13,8 @@ class Task extends Model
 
     public $timestamps = true;
 
+    protected $fillable = [
+        'content'
+    ];
+
 }

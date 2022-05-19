@@ -4,7 +4,7 @@
 @section('content')
     <h1 style="margin: 10px">Create new user</h1>
     <div class="mb-2" style="width: 500px; margin-left: 20px; margin-top: 10px">
-        <form action={{ route('admin.create') }} method="POST">
+        <form action={{ route('user.create') }} method="POST">
             @csrf
             <label>Login</label>
             <input class="form-control" id="login" name="login">
@@ -19,8 +19,8 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="1" id="isAdmin" name="isAdmin">
-                <label class="form-check-label" for="isAdmin">
+                <input class="form-check-input" type="checkbox" value="1" id="is_admin" name="is_admin">
+                <label class="form-check-label" for="is_admin">
                     Administrator
                 </label>
             </div>
@@ -28,10 +28,10 @@
             <div class="col-auto" style="margin-left: 350px">
                 <button type="submit" class="btn btn-primary" style="width: 150px">Create</button>
             </div>
-            @error('user_created')
+            @error('create_user_success')
             <div class="alert alert-success">{{ $message }}</div>
             @enderror
-            @error('create_error')
+            @error('create_user_error')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </form>

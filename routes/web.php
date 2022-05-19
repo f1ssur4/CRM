@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +33,7 @@ Route::get('/login', function () {
     return redirect(\route('/'));
 })->name('user.login');
 
-Route::post('/login', [UserController::class, 'login'])->name('user.login');
+Route::post('/login', [LoginController::class, 'login'])->name('user.login');
 
 
 /*
@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
         return 123;
     })->name('lessons');
 
-    Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
 
 
     /*
@@ -53,18 +53,27 @@ Route::middleware('auth')->group(function () {
      */
     Route::middleware('authorize')->group(function () {
 
-        Route::get('/create', function () {
-            return view('create');
-        })->name('user.create');
+        /*
+         * доступ только для супер администратора. После аутентификации, авторизации и высшей авторизации
+         */
+        Route::middleware('high.authorize')->group(function () {
+            Route::name('tasks.')->group(function () {
 
-        Route::post('/admins/session_data', [AdminController::class, 'addSessionData'])->name('admins.session_data');
+                Route::view('/add_tasks', 'create-tasks-form')->name('form');
 
-        Route::post('/create', [AdminController::class, 'create'])->name('admin.create');
+                Route::post('/add_tasks', [TaskController::class, 'create'])->name('create');
 
-        Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+            });
+        });
+
+        Route::view('/create', 'create')->name('user.create');
+
+        Route::post('/create', [UserController::class, 'createUser'])->name('user.create');
+
+        Route::get('/tasks', [TaskController::class, 'get'])->name('tasks');
 
         Route::get('/clients', function () {
-            //
+            echo 12344;
         })->name('clients');
 
         Route::get('/teachers', function () {

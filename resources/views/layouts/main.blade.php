@@ -29,7 +29,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    @if(\Illuminate\Support\Facades\Gate::check('view'))
+                    @if(\Illuminate\Support\Facades\Gate::check('admin') || \Illuminate\Support\Facades\Gate::check('admin2'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('tasks') }}">Tasks</a>
                         </li>

@@ -19,8 +19,6 @@ class Authenticate
         if (Auth::check()){
             return $next($request);
         }
-        return redirect(route('user.login'))->withErrors([
-            'errorLoginOrRegistration' => 'First you need to login'
-        ]);
+        return back()->withErrors(config('messages.error_auth'));
     }
 }

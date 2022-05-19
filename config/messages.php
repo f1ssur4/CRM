@@ -1,10 +1,14 @@
 <?php
 
 return [
-    'color_changed' => 'Цвет успешно выбран',
-    'user_created' => 'Пользователь успешно создан',
-    'error_validation' => 'Неверный логин или пароль',
-    'create_error' => 'Такой пользователь уже существует',
-    'success_logout' => 'Вы успешно вышли из аккаунта',
-    'non_authorize' => 'У вас нет прав доступа к этой странице'
+    'create_user_success' => ['create_user_success' => 'Пользователь успешно создан'],
+    'create_user_error' => ['create_user_error' => 'Не удалось создать пользователя'],
+    'create_task_success' => ['create_task_success' => 'Задание успешно добавлено'],
+    'create_task_error' => ['create_task_error' => 'Ошибка добавления задания'],
+    'logout_success' => ['logout_success' => 'Вы успешно вышли из аккаунта'],
+    'non_authorize' => ['non_authorize' => 'У вас нет прав доступа к этой странице'],
+    'error_auth' => ['error_auth' => 'Для начала нужно аутентифицироваться'],
+    'error_login' => ['error_login' => 'Не удалось аутентифицировать пользователя'],
+    'error_validation' => ['error_validation' => 'Неверный логин или пароль'],
+
 ];

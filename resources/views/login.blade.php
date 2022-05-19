@@ -22,12 +22,16 @@
             <div class="col-auto" style="margin-left: 350px">
                 <button type="submit" class="btn btn-primary" style="width: 150px">Confirm identity</button>
             </div>
-            @error('error_validation')
+            @error('error_auth')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            @error('success_logout')
+            @error('error_login')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            @error('logout_success')
             <div class="alert alert-success">{{ $message }}</div>
             @enderror
+
         </form>
     </div>
 

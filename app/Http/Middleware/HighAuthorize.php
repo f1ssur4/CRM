@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use \Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 
-class Authorize
+class HighAuthorize
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class Authorize
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Gate::check('admin')){
+        if (Gate::check('admin2')){
             return $next($request);
         }
         return back()->withErrors([

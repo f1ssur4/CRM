@@ -3,56 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserController extends Controller
 {
 
-    public function login(UserRequest $userRequest)
+    public function createUser(UserRequest $userRequest)
     {
-        return $this->isAuth()
-            ? $this->redirectWithErrorAuth()
-            : $this->authenticate($userRequest);
+        return User::where('login', $userRequest->login)->exists()
+            ? $this->redirectWithError(config('messages.create_user_error'))
+            : $this->save($userRequest);
     }
 
-    private function isAuth(): bool
+    private function save(UserRequest $userRequest)
     {
-        return Auth::check();
+        return User::create($userRequest->validated())
+            ? $this->redirectWithSuccess(config('messages.create_user_success'))
+            : $this->redirectWithError(config('messages.create_user_error'));
     }
 
-    private function redirectWithErrorAuth()
+    private function redirectWithSuccess($successMessage)
     {
-        return redirect(route('/'));
+        return back()->withErrors($successMessage);
     }
 
-    private function authenticate(UserRequest $userRequest)
+    private function redirectWithError($errorMessage)
     {
-        return Auth::attempt($userRequest->validated())
-            ? $this->redirectSuccessSessionData($userRequest)
-            : $this->redirectWithErrorValidation();
+        return back()->withErrors($errorMessage);
     }
 
-    private function redirectSuccessSessionData(UserRequest $userRequest)
-    {
-        session()->regenerate();
-        session(['user' => $userRequest->login]);
-        return redirect(route('/'));
-    }
-
-    private function redirectWithErrorValidation()
-    {
-        return back()->withErrors([
-            'error_validation' => config('messages.error_validation'),
-        ])->onlyInput('login');
-    }
-
-    public function logout()
-    {
-        session()->flush();
-        Auth::logout();
-        return redirect(route('user.login'))->withErrors([
-            'success_logout' => config('messages.success_logout')
-        ]);
-    }
 
 }

@@ -3,10 +3,13 @@
 
 @section('content')
     @php $i = 1;@endphp
-
+    @error('non_authorize')
+    <div class="alert alert-warning">{{ $message }}</div>
+    @enderror
     <p><h1 style="margin-left: 10px">Table of daily tasks</h1>
 
-    <table class="table" style="margin-top: 2em">
+    <a style="margin-left: 10px" class="btn btn-primary" href={{route('tasks.form')}}>Create new tasks</a>
+    <table class="table" style="margin-top: 2em; width: auto">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -22,17 +25,6 @@
                 <th scope="row">@php echo $i @endphp</th>
                 <td>@php echo $task->content @endphp</td>
                 <td>
-                    <div class="rectangle"
-                         style="margin-top: 8px;position: fixed;width: 20px;height: 20px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;background:@php session('color') @endphp;"></div>
-                </td>
-                <td>
-                    <button class="btn btn-primary">In process</button>
-                </td>
-                <td>
-                    <div class="rectangle"
-                         style="margin-top: 8px;position: fixed;width: 20px;height: 20px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;background:@php echo session('color') @endphp;"></div>
-                </td>
-                <td>
                     <button class="btn btn-success">Ready</button>
                 </td>
             </tr>
@@ -40,5 +32,6 @@
         @endforeach
         </tbody>
     </table>
+
 @endsection
 
