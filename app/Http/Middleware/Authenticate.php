@@ -19,6 +19,6 @@ class Authenticate
         if (Auth::check()){
             return $next($request);
         }
-        return back()->withErrors(config('messages.error_auth'));
+        return redirect('/')->withErrors(config('messages.error_auth'));
     }
 }

@@ -4,7 +4,7 @@
 @section('content')
     <h1>Login</h1>
     <div class="mb-2" style="width: 500px; margin-left: 20px; margin-top: 10px">
-        <form action={{ route('user.login') }} method="POST">
+        <form action={{ route('users.login') }} method="POST">
             @csrf
             <label>Login</label>
             <input class="form-control" id="login" name="login">
@@ -27,9 +27,6 @@
             @enderror
             @error('error_login')
             <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            @error('logout_success')
-            <div class="alert alert-success">{{ $message }}</div>
             @enderror
 
         </form>

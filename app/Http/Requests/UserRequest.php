@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\whichStatusId;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -24,8 +25,9 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'login' => 'required',
-            'password' => 'required',
+            'login' => ['required'],
+            'password' => ['required'],
+            'status_id' => [new whichStatusId()]
         ];
     }
 }

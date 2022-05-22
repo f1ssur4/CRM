@@ -7,8 +7,15 @@
         <form action="{{route('tasks.create')}}" method="POST">
             @csrf
             <div class="col">
-                <input type="text" class="form-control" placeholder="Description task" aria-label="Description task" name="content">
+                <textarea class="form-control" placeholder="Description task" aria-label="Description task"
+                          name="content"></textarea>
             </div>
+            <select style="margin-top: 5px" name="performer">
+                <option value="everybody">everybody</option>
+            @foreach($users as $user)
+                    <option value=@php echo $user @endphp>@php echo $user @endphp</option>
+                @endforeach
+            </select>
             <button style="margin-top: 5px" type="submit" class="btn btn-success">Add</button>
         </form>
     </div>

@@ -17,7 +17,7 @@ class Authorize
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Gate::check('admin')){
+        if (Gate::check('admin1')){
             return $next($request);
         }
         return back()->withErrors([

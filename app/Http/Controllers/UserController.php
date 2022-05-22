@@ -11,25 +11,29 @@ class UserController extends Controller
     public function createUser(UserRequest $userRequest)
     {
         return User::where('login', $userRequest->login)->exists()
-            ? $this->redirectWithError(config('messages.create_user_error'))
+            ? $this->redirectWithMessage(config('messages.create_user_error'))
             : $this->save($userRequest);
+    }
+
+    public function getUsersList(User $user)
+    {
+        return $user->all()->reject(function ($user) {
+            return $user->status_id < 1;
+        })->map(function ($user) {
+            return $user->login;
+        });
     }
 
     private function save(UserRequest $userRequest)
     {
         return User::create($userRequest->validated())
-            ? $this->redirectWithSuccess(config('messages.create_user_success'))
-            : $this->redirectWithError(config('messages.create_user_error'));
+            ? $this->redirectWithMessage(config('messages.create_user_success'))
+            : $this->redirectWithMessage(config('messages.create_user_error'));
     }
 
-    private function redirectWithSuccess($successMessage)
+    private function redirectWithMessage($message)
     {
-        return back()->withErrors($successMessage);
-    }
-
-    private function redirectWithError($errorMessage)
-    {
-        return back()->withErrors($errorMessage);
+        return back()->withErrors($message);
     }
 
 

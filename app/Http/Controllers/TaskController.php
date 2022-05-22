@@ -2,39 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
-use Illuminate\Http\Request;
+use App\Events\ReadyTask;
 use App\Http\Requests\TaskRequest;
+use App\Models\Task;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function get()
+    public function index()
     {
-        $tasks = Task::all();
-        return view('tasks', ['tasks' => $tasks]);
+        return view('tasks', ['tasks' => Task::all()]);
+    }
+
+    public function formCreate(UserController $controller)
+    {
+        return view('create-tasks-form', ['users' => $controller->getUsersList(new User())]);
+    }
+
+    public function delete($id)
+    {
+        Task::where('id', $id)->delete();
     }
 
     public function create(TaskRequest $taskRequest)
     {
         return $taskRequest->validated()
             ? $this->save($taskRequest)
-            : $this->redirectWithError(config('messages.create_task_error'));
+            : $this->redirectWithMessage(config('messages.create_task_error'));
     }
 
-    private function redirectWithError($message)
+    public function ready(Request $request)
     {
-        return back()->withErrors($message);
-    }
-
-    private function redirectWithSuccess($message)
-    {
-        return back()->withErrors($message);
+        //php artisan queue:work --queue=email,deleteTask
+        ReadyTask::dispatch($request->post('id'), $request->user()->login);
+        return $this->redirectWithMessage();
     }
 
     private function save(TaskRequest $taskRequest)
     {
         return Task::create($taskRequest->validated())
-            ? $this->redirectWithSuccess(config('messages.create_task_success'))
-            : $this->redirectWithError(config('messages.create_task_error'));
+            ? $this->redirectWithMessage(config('messages.create_task_success'))
+            : $this->redirectWithMessage(config('messages.create_task_error'));
+    }
+
+    private function redirectWithMessage($message = null): \Illuminate\Http\RedirectResponse
+    {
+        return back()->withErrors($message);
     }
 }

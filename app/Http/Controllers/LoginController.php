@@ -8,28 +8,33 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
 
+    public function index()
+    {
+        return Auth::check()
+            ? redirect(\route('/'))
+            : view('login');
+    }
+
     public function login(UserRequest $userRequest)
     {
         return Auth::check()
-            ? $this->redirectWithError()
+            ? $this->redirectError()
             : $this->authenticate($userRequest);
     }
 
     private function authenticate(UserRequest $userRequest)
     {
-        return Auth::attempt($userRequest->validated())
-            ? $this->redirectSuccessSessionData($userRequest)
-            : $this->redirectWithError(config('messages.error_login'));
+        return Auth::attempt($userRequest->validated()) && session()->regenerate()
+            ? $this->redirectSuccess(config('messages.login_success'))
+            : $this->redirectError(config('messages.error_login'));
     }
 
-    private function redirectSuccessSessionData(UserRequest $userRequest)
+    private function redirectSuccess(array $message)
     {
-        session()->regenerate();
-        session(['user' => $userRequest->login]);
-        return redirect(route('/'));
+        return redirect(route('/'))->withErrors($message);
     }
 
-    private function redirectWithError($message)
+    private function redirectError(array $message)
     {
         return back()->withErrors($message);
     }
@@ -38,7 +43,7 @@ class LoginController extends Controller
     {
         session()->flush();
         Auth::logout();
-        return redirect(route('user.login'))->withErrors(config('messages.logout_success'));
+        return $this->redirectSuccess(config('messages.logout_success'));
     }
 
 }

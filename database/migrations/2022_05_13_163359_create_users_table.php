@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('login')->unique('login');
             $table->string('password');
-            $table->integer('is_admin')->nullable('false');
+            $table->integer('status_id')->nullable('false');
             $table->timestamps();
         });
     }

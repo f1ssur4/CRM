@@ -29,9 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    @if(\Illuminate\Support\Facades\Gate::check('admin') || \Illuminate\Support\Facades\Gate::check('admin2'))
+                    @if(\Illuminate\Support\Facades\Gate::check('admin1') || \Illuminate\Support\Facades\Gate::check('admin2'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tasks') }}">Tasks</a>
+                            <a class="nav-link" href="{{ route('tasks.list') }}">Tasks</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/teachers">Teachers</a>
@@ -43,8 +43,9 @@
                             <a class="nav-link" href="/statistics">Statistic</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.create') }}">Create user</a>
+                            <a class="nav-link" href="{{ route('users.create') }}">Create user</a>
                         </li>
+
                     @endif
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <li class="nav-item">
@@ -53,16 +54,16 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position: absolute; right: 10px">
                             <li class="nav-item">
                                 <h5 class="nav-link"
-                                    style="color: @php echo session()->get('color') @endphp">@php echo session('user') @endphp</h5>
+                                    style="color: @php echo session()->get('color') @endphp">@php echo \Illuminate\Support\Facades\Auth::user()->login @endphp</h5>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/logout">Logout</a>
+                                <a class="nav-link" href="{{route('users.logout')}}">Logout</a>
                             </li>
                         </ul>
                     @else
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position: absolute; right: 10px">
                             <li class="nav-item">
-                                <a class="nav-link" href="/login">Login</a>
+                                <a class="nav-link" href="{{route('users.login')}}">Login</a>
                             </li>
                         </ul>
                     @endif
@@ -71,9 +72,10 @@
         </div>
     </nav>
 @show
-<div class="content">
+<div class="content" style="margin-top: 20px; margin-bottom: 100px">
     @yield('content')
 </div>
+@section('bottom')
 
 <div id="copyright" class="botbar" style="position: fixed; bottom: 0; left: 0; width: 100%">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -91,4 +93,5 @@
     </center>
 </div>
 </body>
+@show
 </html>
