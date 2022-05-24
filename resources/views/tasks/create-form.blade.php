@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="row" style="margin: 20px; width: 1000px">
-        <form action="{{route('tasks.create')}}" method="POST">
+        <form action="{{route('tasks.add')}}" method="POST">
             @csrf
             <div class="col">
                 <textarea class="form-control" placeholder="Description task" aria-label="Description task"

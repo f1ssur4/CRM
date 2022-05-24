@@ -8,7 +8,7 @@
     @enderror
     <p><h1 style="margin-left: 10px">Table of daily tasks</h1>
     @if(\Illuminate\Support\Facades\Gate::check('admin2'))
-    <a style="margin-left: 10px" class="btn btn-primary" href={{route('tasks.form')}}>Create new tasks</a>
+    <a style="margin-left: 10px" class="btn btn-primary" href={{route('tasks.add')}}>Create new tasks</a>
     @endif
     <table class="table" style="margin-top: 2em; width: auto">
         <thead>

@@ -12,12 +12,12 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return view('tasks', ['tasks' => Task::all()]);
+        return view('tasks.index', ['tasks' => Task::all()]);
     }
 
     public function formCreate(UserController $controller)
     {
-        return view('create-tasks-form', ['users' => $controller->getUsersList(new User())]);
+        return view('tasks.create-form', ['users' => $controller->getUsersList(new User())]);
     }
 
     public function delete($id)

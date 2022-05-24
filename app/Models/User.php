@@ -11,14 +11,14 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    const ADMIN_STATUS = 1;
-    const MAIN_ADMIN_STATUS = 2;
+    const ADMIN_ID = 1;
+    const MAIN_ADMIN_ID = 2;
     protected $table = 'users';
 
     protected $fillable = [
         'login',
         'password',
-        'status_id'
+        'auth_id'
     ];
 
     protected $hidden = [

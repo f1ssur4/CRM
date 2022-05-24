@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('clients_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surname');
-            $table->string('phone')->unique();
-            $table->string('advertising');
-            $table->text('comment')->nullable();
-            $table->foreignId('status_id')->constrained('statuses');
+            $table->foreignId('client_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
+            $table->foreignId('subscription_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('clients_subscriptions');
     }
 };

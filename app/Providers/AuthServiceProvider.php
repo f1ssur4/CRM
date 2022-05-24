@@ -27,11 +27,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('admin1', function (User $user) {
-            return $user->status_id >= User::ADMIN_STATUS;
+            return $user->auth_id >= User::ADMIN_ID;
         });
 
         Gate::define('admin2', function (User $user) {
-            return $user->status_id === User::MAIN_ADMIN_STATUS;
+            return $user->auth_id === User::MAIN_ADMIN_ID;
         });
     }
 }

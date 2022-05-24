@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +28,9 @@ Route::name('users.')->group(function () {
 
     Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
-    Route::middleware(['auth','authorize'])->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
 
-        Route::view('/create', 'create-users')->name('create');
+        Route::view('/create', 'users.create-form')->name('create');
 
         Route::post('/create', [UserController::class, 'createUser'])->name('create');
 
@@ -40,23 +40,43 @@ Route::name('users.')->group(function () {
 
 
 Route::name('tasks.')->group(function () {
-    Route::middleware(['auth','authorize'])->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
 
         Route::get('/tasks', [TaskController::class, 'index'])->name('list');
 
-        Route::post('/readyTask', [TaskController::class, 'ready'])->name('ready');
+        Route::post('/tasks/ready', [TaskController::class, 'ready'])->name('ready');
 
         Route::middleware('high.authorize')->group(function () {
 
-            Route::get('/add_tasks', [TaskController::class, 'formCreate'])->name('form');
+            Route::get('/tasks/add', [TaskController::class, 'formCreate'])->name('add');
 
-            Route::post('/add_tasks', [TaskController::class, 'create'])->name('create');
+            Route::post('/tasks/add', [TaskController::class, 'create'])->name('add');
 
         });
 
     });
 
 });
+
+
+Route::name('clients.')->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
+
+        Route::get('/clients/sort', [ClientController::class, 'sort'])->name('sort');
+
+        Route::get('/clients', [ClientController::class, 'index'])->name('index');
+
+        Route::get('/clients/{id}', [ClientController::class, 'show'])->name('id');
+
+        Route::post('/clients/update', [ClientController::class, 'update'])->name('update');
+
+        Route::post('/clients/add-subscription', [ClientController::class, 'addSubscription'])->name('add-subs');
+
+
+    });
+
+});
+
 
 
 Route::name('lessons.')->group(function () {
@@ -103,9 +123,9 @@ Route::name('lessons.')->group(function () {
  */
 //Route::middleware('authorize')->group(function () {
 
-    /*
-     * доступ только для супер администратора. После аутентификации, авторизации и высшей авторизации
-     */
+/*
+ * доступ только для супер администратора. После аутентификации, авторизации и высшей авторизации
+ */
 //    Route::middleware('high.authorize')->group(function () {
 
 //        Route::name('tasks.')->group(function () {
@@ -123,9 +143,6 @@ Route::name('lessons.')->group(function () {
 //
 //Route::post('/create', [UserController::class, 'createUser'])->name('user.create');
 
-Route::get('/clients', function () {
-    echo 12344;
-})->name('clients');
 
 Route::get('/teachers', function () {
     //

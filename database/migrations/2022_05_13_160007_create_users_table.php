@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('login')->unique('login');
             $table->string('password');
-            $table->integer('status_id')->nullable('false');
+            $table->integer('auth_id')->nullable('false');
             $table->timestamps();
         });
     }

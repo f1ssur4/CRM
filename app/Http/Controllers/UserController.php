@@ -18,7 +18,7 @@ class UserController extends Controller
     public function getUsersList(User $user)
     {
         return $user->all()->reject(function ($user) {
-            return $user->status_id < 1;
+            return $user->auth_id < 1;
         })->map(function ($user) {
             return $user->login;
         });
