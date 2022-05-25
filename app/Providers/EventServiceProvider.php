@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\AddSubscription;
 use App\Events\ReadyTask;
+use App\Listeners\SendNewSubscription;
 use App\Listeners\DeleteTask;
-use App\Listeners\SendResultNotification;
+use App\Listeners\SendTasksResult;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,8 +24,11 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         ReadyTask::class => [
-            SendResultNotification::class,
+            SendTasksResult::class,
             DeleteTask::class
+        ],
+        AddSubscription::class => [
+            SendNewSubscription::class
         ]
     ];
 

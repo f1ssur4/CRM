@@ -2,19 +2,20 @@
 
 namespace App\Listeners;
 
-use App\Events\ReadyTask;
+use App\Events\AddSubscription;
+use App\Mail\NewSubscriptionMail;
 use App\Mail\SendResult;
+use App\Mail\TasksResultMail;
 use App\Models\Task;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendResultNotification implements ShouldQueue
+class SendNewSubscription implements ShouldQueue
 {
     public $connection = 'database';
 
-    public $queue = 'email';
-
+    public $queue = 'new_subscription';
     /**
      * Create the event listener.
      *
@@ -28,11 +29,12 @@ class SendResultNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  \App\Events\ReadyTask  $event
+     * @param  \App\Events\AddSubscription  $event
      * @return void
      */
-    public function handle(ReadyTask $event)
+    public function handle(AddSubscription $event)
     {
-        Mail::to('example@gmail.com')->send(new SendResult($event->username, Task::find($event->taskId)));
+        Mail::to('example@gmail.com')->send(new NewSubscriptionMail($event->username, $event->client_name, $event->subscription));
+
     }
 }

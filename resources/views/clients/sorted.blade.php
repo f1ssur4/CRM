@@ -8,6 +8,7 @@
             @csrf
         <select name="sortItem">
             <option disabled selected >выберете сортировку</option>
+            <option value="id" >default</option>
             <option value="status_id">По статусу</option>
             <option value="advertising">По рекламе</option>
             <option value="name">По имени</option>

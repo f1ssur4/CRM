@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendResult extends Mailable
+class TasksResultMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -26,6 +26,7 @@ class SendResult extends Mailable
         $this->task = $task;
     }
 
+
     /**
      * Build the message.
      *
@@ -33,7 +34,6 @@ class SendResult extends Mailable
      */
     public function build()
     {
-        sleep(5);
-        return $this->view('mail.result-mail', ['username' => $this->username, 'task' => $this->task]);
+        return $this->view('mail.result-task', ['username' => $this->username, 'task' => $this->task]);
     }
 }

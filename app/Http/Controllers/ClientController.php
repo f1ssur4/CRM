@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AddSubscription;
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
-use App\Models\ClientSubscription;
 use App\Models\Status;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -19,24 +18,48 @@ class ClientController extends Controller
 
     public function show($id)
     {
-        return view('clients.show', ['client' => Client::find($id), 'statuses' => Status::all(), 'subscriptions' => Subscription::all()]);
+        return view('clients.show', [
+            'client' => Client::findOrFail($id),
+            'statuses' => Status::all(),
+            'subscriptions' => Subscription::all()
+        ]);
     }
 
     public function update(ClientRequest $request)
     {
-        return Client::where('id', $request->post('id'))->update([
-            'phone' => $request->post('phone'),
-            'status_id' => Status::where('title', $request->post('status'))->get('id')[0]->id,
-            'comment' => $request->post('comment')
-        ])
-            ? $this->returnWithMessage(config('messages.update_client_success'))
-            : $this->returnWithMessage(config('messages.update_client_error'));
+        Client::edit($request);
+        return $this->returnWithMessage(config('messages.update_client_success'));
     }
 
     public function addSubscription(Request $request)
     {
         Client::find($request->post('id'))->subscriptions()->attach($request->post('subscription'));
+        $this->sendMailJob($request);
         return $this->returnWithMessage(config('messages.update_client_success'));
+    }
+
+    // php artisan queue:work --queue=new_subscription  or  php artisan queue:work --queue=email,deleteTask,new_subscription
+    private function sendMailJob($request)
+    {
+        AddSubscription::dispatch(
+            $request->user()->login,
+            Client::getNameSurnameById($request->post('id')),
+            Subscription::getSubscriptionFullData($request->post('subscription'))
+        );
+    }
+
+    private function sortView()
+    {
+        return view('clients.sorted', ['clients' => Client::orderBy(session('sortItem'))->simplePaginate(10)]);
+    }
+
+    public function sortBy(Request $request)
+    {
+        if (!is_null($request->post('sortItem'))) {
+            session(['sortItem' => $request->post('sortItem')]);
+            return $this->sortView();
+        }
+        return $this->sortView();
     }
 
     private function returnWithMessage($message = null)

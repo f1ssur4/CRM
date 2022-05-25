@@ -17,4 +17,11 @@ class Subscription extends Model
         return $this->belongsToMany(Client::class, 'clients_subscriptions')
             ->withTimestamps();
     }
+
+    public static function getSubscriptionFullData($id)
+    {
+        return self::where('id', $id)->get()->map(function($subs) {
+            return $subs->title . ' ' . $subs->minutes . ' ' . $subs->count_lessons . ' ' . $subs->price;
+        })[0];
+    }
 }
