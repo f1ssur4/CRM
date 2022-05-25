@@ -17,4 +17,9 @@ class ArtController extends Controller
     {
         return view('arts.show', ['art' => Art::findOrFail($id), 'instructors' => Instructor::where('art_id', $id)->get()]);
     }
+
+    public function create()
+    {
+        return view('arts.create');
+    }
 }

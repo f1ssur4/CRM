@@ -27,11 +27,11 @@
                     <td> @php echo $client->surname @endphp</td>
                     <td><input name="phone" value="@php echo $client->phone @endphp"></td>
                     <td>@php echo $client->advertising @endphp</td>
-                    <td><select style="margin-top: 5px" name="status">
+                    <td><select style="margin-top: 5px" name="status_id">
                             <option
-                                value="@php echo $client->status->title @endphp">@php echo $client->status->title @endphp</option>
+                                value="@php echo $client->status->id @endphp">@php echo $client->status->title @endphp</option>
                             @foreach($statuses as $status)
-                                <option value=@php echo $status->title @endphp>@php echo $status->title @endphp</option>
+                                <option value=@php echo $status->id @endphp>@php echo $status->title @endphp</option>
                             @endforeach
                         </select></td>
                     <td>
@@ -40,6 +40,18 @@
                 </tr>
             </tbody>
         </table>
+        @error('id')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        @error('phone')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        @error('status_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        @error('comment')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3" style="width: 1000px; margin-left: 200px">
             <label for="exampleFormControlTextarea1" class="form-label"><b>Comment</b></label>
             <textarea class="form-control" name="comment" rows="4">@php echo $client->comment @endphp</textarea>
@@ -50,6 +62,9 @@
                 @enderror
                 @error('update_client_error')
                 <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                @error('add_subscription_success')
+                <div class="alert alert-success">{{ $message }}</div>
                 @enderror
 
                 <h2>История абонементов</h2>

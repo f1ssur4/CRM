@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Events\AddSubscription;
 use App\Http\Requests\ClientRequest;
+use App\Http\Requests\ClientUpdateRequest;
 use App\Models\Client;
+use App\Models\Instructor;
 use App\Models\Status;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
@@ -25,9 +27,9 @@ class ClientController extends Controller
         ]);
     }
 
-    public function update(ClientRequest $request)
+    public function update(ClientUpdateRequest $request)
     {
-        Client::edit($request);
+        Client::edit($request->validated());
         return $this->returnWithMessage(config('messages.update_client_success'));
     }
 
@@ -35,7 +37,7 @@ class ClientController extends Controller
     {
         Client::find($request->post('id'))->subscriptions()->attach($request->post('subscription'));
         $this->sendMailJob($request);
-        return $this->returnWithMessage(config('messages.update_client_success'));
+        return $this->returnWithMessage(config('messages.add_subscription_success'));
     }
 
     // php artisan queue:work --queue=new_subscription  or  php artisan queue:work --queue=email,deleteTask,new_subscription
@@ -65,5 +67,16 @@ class ClientController extends Controller
     private function returnWithMessage($message = null)
     {
         return back()->withErrors($message);
+    }
+
+    public function createView()
+    {
+        return view('clients.create', ['statuses' => Status::all(), 'instructors' => Instructor::all()]);
+    }
+
+    public function create(ClientRequest $request)
+    {
+        Client::create($request->validated());
+        return $this->returnWithMessage(config('messages.create_client_success'));
     }
 }

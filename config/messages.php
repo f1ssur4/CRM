@@ -5,6 +5,8 @@ return [
     'create_user_error' => ['create_user_error' => 'Не удалось создать пользователя'],
     'create_task_success' => ['create_task_success' => 'Задание успешно добавлено'],
     'create_task_error' => ['create_task_error' => 'Ошибка добавления задания'],
+    'create_client_success' => ['create_client_success' => 'Клиент успешно создан'],
+    'add_subscription_success' => ['add_subscription_success' => 'Абонемент успешно добавлен'],
     'login_success' => ['logins_success' => 'Вы успешно вошли в CRM'],
     'update_client_success' => ['update_client_success' => 'Данные успешно обновлены'],
     'update_client_error' => ['update_client_error' => 'Не удалось обновить данные'],

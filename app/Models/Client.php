@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Requests\ClientRequest;
+use App\Http\Requests\ClientUpdateRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +17,9 @@ class Client extends Model
         'surname',
         'phone',
         'advertising',
+        'comment',
+        'status_id',
+        'instructor_id'
     ];
 
     public $timestamps = true;
@@ -38,13 +41,9 @@ class Client extends Model
     }
 
 
-    public static function edit(ClientRequest $request)
+    public static function edit($validated_data)
     {
-       return Client::where('id', $request->post('id'))->update([
-            'phone' => $request->post('phone'),
-            'status_id' => Status::where('title', $request->post('status'))->get('id')[0]->id,
-            'comment' => $request->post('comment')
-        ]);
+       return Client::where('id', $validated_data['id'])->update($validated_data);
     }
 
     public static function getNameSurnameById($id)

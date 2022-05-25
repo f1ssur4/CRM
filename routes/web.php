@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'main')->name('/');
 
+Route::view('/workboard', 'workboard')->middleware(['auth', 'authorize'])->name('workboard');
+
 
 Route::name('users.')->group(function () {
 
@@ -68,6 +70,10 @@ Route::name('clients.')->group(function () {
 
         Route::match(['post', 'get'], '/clients/sort', [ClientController::class, 'sortBy'])->name('sort');
 
+        Route::get('/clients/create', [ClientController::class, 'createView'])->name('create');
+
+        Route::post('/clients/create', [ClientController::class, 'create'])->name('create');
+
         Route::get('/clients/{id}', [ClientController::class, 'show'])->name('show');
 
         Route::post('/clients/update', [ClientController::class, 'update'])->name('update');
@@ -84,6 +90,8 @@ Route::name('instructors.')->group(function () {
 
         Route::get('/instructors', [InstructorController::class, 'index'])->name('index');
 
+        Route::get('/instructors/create', [InstructorController::class, 'create'])->name('create');
+
         Route::get('/instructors/{id}', [InstructorController::class, 'show'])->name('show');
 
         Route::post('/instructors/update', [InstructorController::class, 'update'])->name('update');
@@ -96,6 +104,8 @@ Route::name('arts.')->group(function () {
     Route::middleware(['auth', 'authorize'])->group(function () {
 
         Route::get('/arts', [ArtController::class, 'index'])->name('index');
+
+        Route::match(['get', 'post'],'/arts/create', [ArtController::class, 'create'])->name('create');
 
         Route::get('/arts/{id}', [ArtController::class, 'show'])->name('show');
 

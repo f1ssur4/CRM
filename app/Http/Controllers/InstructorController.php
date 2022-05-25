@@ -30,4 +30,9 @@ class InstructorController extends Controller
     {
         return back()->withErrors($message);
     }
+
+    public function create()
+    {
+        return view('instructors.create');
+    }
 }

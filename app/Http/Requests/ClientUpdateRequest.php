@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Status;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClientRequest extends FormRequest
+class ClientUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,10 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|alpha',
-            'surname' => 'required|alpha',
+            'id' => 'required|numeric',
             'phone' => 'required|numeric',
             'comment' => 'max:500',
-            'advertising' => 'required',
-            'status_id' => 'required',
-            'instructor_id' => 'required'
+            'status_id' => 'required|numeric',
         ];
     }
 }
