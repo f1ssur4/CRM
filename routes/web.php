@@ -3,7 +3,9 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArtController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,7 +68,7 @@ Route::name('clients.')->group(function () {
 
         Route::match(['post', 'get'], '/clients/sort', [ClientController::class, 'sortBy'])->name('sort');
 
-        Route::get('/clients/{id}', [ClientController::class, 'show'])->name('id');
+        Route::get('/clients/{id}', [ClientController::class, 'show'])->name('show');
 
         Route::post('/clients/update', [ClientController::class, 'update'])->name('update');
 
@@ -77,16 +79,30 @@ Route::name('clients.')->group(function () {
 });
 
 
+Route::name('instructors.')->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
+
+        Route::get('/instructors', [InstructorController::class, 'index'])->name('index');
+
+        Route::get('/instructors/{id}', [InstructorController::class, 'show'])->name('show');
+
+        Route::post('/instructors/update', [InstructorController::class, 'update'])->name('update');
+
+    });
+});
 
 
+Route::name('arts.')->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
 
-Route::get('/teachers', function () {
-    //
-})->name('teachers');
+        Route::get('/arts', [ArtController::class, 'index'])->name('index');
 
-Route::get('/arts', function () {
-    //
-})->name('arts');
+        Route::get('/arts/{id}', [ArtController::class, 'show'])->name('show');
+
+
+    });
+});
+
 
 Route::get('/statistics', function () {
     //

@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Instructor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Teacher>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Instructor>
  */
-class TeacherFactory extends Factory
+class InstructorFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,6 +21,7 @@ class TeacherFactory extends Factory
             'name' => $this->faker->firstName,
             'surname' => $this->faker->lastName,
             'phone' => $this->faker->phoneNumber,
+            'description' => $this->faker->text,
             'art_id' => rand(1,10)
         ];
     }

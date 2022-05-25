@@ -19,7 +19,7 @@ class LessonFactory extends Factory
     {
         return [
             'client_id' => rand(1,11),
-            'teacher_id' => rand(1,15),
+            'instructor_id' => rand(1,15),
             'start_time' => $this->faker->dateTime
         ];
     }

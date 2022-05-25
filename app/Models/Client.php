@@ -32,6 +32,11 @@ class Client extends Model
             ->withTimestamps();
     }
 
+    public function instructor()
+    {
+        return $this->belongsTo(Instructor::class, 'instructor_id');
+    }
+
 
     public static function edit(ClientRequest $request)
     {

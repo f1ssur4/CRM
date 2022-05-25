@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('advertising');
             $table->text('comment')->nullable();
             $table->foreignId('status_id')->constrained('statuses');
+            $table->foreignId('instructor_id')->constrained('instructors');
             $table->timestamps();
         });
     }

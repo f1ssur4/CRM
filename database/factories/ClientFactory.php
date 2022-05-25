@@ -21,8 +21,9 @@ class ClientFactory extends Factory
             'name' => $this->faker->firstName,
             'surname' => $this->faker->lastName,
             'phone' => $this->faker->phoneNumber,
-            'advertising' => $array[array_rand(['inst', 'facebook', 'friend', 'website'], 1)],
+            'advertising' => $array[array_rand(['inst', 'facebook', 'friend', 'website'])],
             'status_id' => rand(1,4),
+            'instructor_id' => rand(1,15),
             'comment' => $this->faker->text
         ];
     }

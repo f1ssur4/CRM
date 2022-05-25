@@ -21,6 +21,8 @@
             <th scope="col">Name</th>
             <th scope="col">Phone</th>
             <th scope="col">Advertising</th>
+            <th scope="col">Art</th>
+            <th scope="col">Instructor</th>
             <th scope="col">Status</th>
             <th scope="col"></th>
         </tr>
@@ -31,6 +33,8 @@
                     <td>@php echo $client->name .' '. $client->surname @endphp</td>
                     <td>@php echo $client->phone @endphp</td>
                     <td>@php echo $client->advertising @endphp</td>
+                    <td>@php echo $client->instructor->art->title @endphp</td>
+                    <td><a href="/instructors/@php echo $client->instructor->id @endphp">@php echo $client->instructor->name . ' ' . $client->instructor->surname @endphp</a></td>
                     <td>@php echo $client->status->title @endphp</td>
                     <td><a href="/clients/@php echo $client->id @endphp">посмотреть клиента</a></td>
                 </tr>

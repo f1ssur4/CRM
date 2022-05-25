@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Art;
 use App\Models\Client;
 use App\Models\ClientSubscription;
+use App\Models\Instructor;
 use App\Models\Lesson;
 use App\Models\School;
 use App\Models\Status;
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
         Status::factory(4)->create();
         School::factory(3)->create();
         Art::factory(10)->create();
-        Teacher::factory(15)->create();
+        Instructor::factory(15)->create();
         Client::factory(30)->create();
         Lesson::factory(3)->create();
         $this->call([UserSeeder::class]);
