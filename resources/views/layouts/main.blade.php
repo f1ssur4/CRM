@@ -29,9 +29,12 @@
                                 </a>
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="{{route('clients.create')}}">Create client</a></li>
-                                    <li><a class="dropdown-item" href="{{route('arts.create')}}">Create art</a></li>
-                                    <li><a class="dropdown-item" href="{{route('instructors.create')}}">Create instructor</a></li>
+                                    <li><a class="dropdown-item" href="{{route('clients.add')}}">Add client</a></li>
+                                    <li><a class="dropdown-item" href="{{route('arts.add')}}">Add art</a></li>
+                                    <li><a class="dropdown-item" href="{{route('instructors.add')}}">Add instructor</a></li>
+                                    <li><a class="dropdown-item" href="{{route('schools.add')}}">Add school</a></li>
+                                    <li><a class="dropdown-item" href="{{route('statuses.add')}}">Add status</a></li>
+                                    <li><a class="dropdown-item" href="{{route('subscriptions.add')}}">Add subscription</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -73,7 +76,11 @@
                                 <a class="nav-link" href="{{route('users.login')}}">Login</a>
                             </li>
                         </ul>
+
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('info') }}">General information</a>
+                    </li>
                 </ul>
             </div>
         </div>

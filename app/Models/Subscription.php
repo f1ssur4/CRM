@@ -11,6 +11,13 @@ class Subscription extends Model
 
     protected $table = 'subscriptions';
 
+    protected $fillable = [
+        'title',
+        'minutes',
+        'count_lessons',
+        'price'
+    ];
+
 
     public function clients()
     {

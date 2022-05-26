@@ -11,6 +11,11 @@ class Art extends Model
 
     protected $table = 'arts';
 
+    protected $fillable = [
+      'title',
+      'school_id'
+    ];
+
     public $timestamps = true;
 
     public function school()

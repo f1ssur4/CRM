@@ -34,6 +34,9 @@
                         <button class="btn btn-primary" type="submit">Обновить</button>
                     </td>
                 </tr>
+                @error('phone')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             </tbody>
         </table>
         <div class="mb-3" style="width: 1000px; margin-left: 200px">
@@ -42,6 +45,9 @@
                       rows="4">@php echo $instructor->description @endphp</textarea>
             </form>
             <div style="margin-top: 50px">
+                @error('description')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 @error('update_client_success')
                 <div class="alert alert-success">{{ $message }}</div>
                 @enderror

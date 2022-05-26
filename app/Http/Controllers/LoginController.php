@@ -25,25 +25,15 @@ class LoginController extends Controller
     private function authenticate(UserRequest $userRequest)
     {
         return Auth::attempt($userRequest->validated()) && session()->regenerate()
-            ? $this->redirectSuccess(config('messages.login_success'))
-            : $this->redirectError(config('messages.error_login'));
-    }
-
-    private function redirectSuccess(array $message)
-    {
-        return redirect(route('/'))->withErrors($message);
-    }
-
-    private function redirectError(array $message)
-    {
-        return back()->withErrors($message);
+            ? $this->returnWithMessage(config('messages.login_success'))
+            : $this->returnWithMessage(config('messages.error_login'));
     }
 
     public function logout()
     {
         session()->flush();
         Auth::logout();
-        return $this->redirectSuccess(config('messages.logout_success'));
+        return $this->returnWithMessage(config('messages.logout_success'));
     }
 
 }

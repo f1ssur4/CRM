@@ -11,6 +11,13 @@ class Instructor extends Model
 
     protected $table = 'instructors';
 
+    protected $fillable = [
+      'name',
+      'surname',
+      'phone',
+      'description',
+      'art_id',
+    ];
     public $timestamps = true;
 
     public function art()

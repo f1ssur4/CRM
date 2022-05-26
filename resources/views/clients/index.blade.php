@@ -11,7 +11,13 @@
             <option value="status_id">По статусу</option>
             <option value="advertising">По рекламе</option>
             <option value="name">По имени</option>
+            <option value="created_at">По дате добавления</option>
         </select>
+            <select name="sortLogic">
+                <option disabled selected >по возрастанию/убыванию</option>
+                <option value="asc">По возрастанию</option>
+                <option value="desc">По убыванию</option>
+            </select>
         <button type="submit">Сортировать</button>
         </form>
     </div>

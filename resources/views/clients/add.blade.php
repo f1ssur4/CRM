@@ -4,12 +4,12 @@
 @section('content')
 
     <div style="margin: 20px">
-        @error('create_client_success')
+        @error('add_client_success')
         <div class="alert alert-success">
             {{$message}}
         </div>
         @enderror
-        <form action="{{route('clients.create')}}" method="post">
+        <form action="{{route('clients.add')}}" method="post">
             @csrf
             <div style="width: 500px;">
                 <div class="mb-3">
@@ -75,7 +75,7 @@
                     @enderror
                 </div>
                 <div style="margin-top: 10px">
-                <button class="btn btn-success" type="submit">Create</button>
+                <button class="btn btn-success" type="submit">Add</button>
                 </div>
             </div>
         </form>

@@ -11,5 +11,9 @@ class School extends Model
 
     protected $table = 'schools';
 
+    protected $fillable = [
+        'address'
+    ];
+
     public $timestamps = true;
 }

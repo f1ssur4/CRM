@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArtController;
+use \App\Http\Controllers\SchoolController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\InfoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'main')->name('/');
 
 Route::view('/workboard', 'workboard')->middleware(['auth', 'authorize'])->name('workboard');
+
+Route::get('/info', [InfoController::class, 'index'])->middleware(['auth', 'authorize'])->name('info');
 
 
 Route::name('users.')->group(function () {
@@ -70,9 +76,9 @@ Route::name('clients.')->group(function () {
 
         Route::match(['post', 'get'], '/clients/sort', [ClientController::class, 'sortBy'])->name('sort');
 
-        Route::get('/clients/create', [ClientController::class, 'createView'])->name('create');
+        Route::get('/clients/add', [ClientController::class, 'addView'])->name('add');
 
-        Route::post('/clients/create', [ClientController::class, 'create'])->name('create');
+        Route::post('/clients/add', [ClientController::class, 'add'])->name('add');
 
         Route::get('/clients/{id}', [ClientController::class, 'show'])->name('show');
 
@@ -90,7 +96,9 @@ Route::name('instructors.')->group(function () {
 
         Route::get('/instructors', [InstructorController::class, 'index'])->name('index');
 
-        Route::get('/instructors/create', [InstructorController::class, 'create'])->name('create');
+        Route::get('/instructors/add', [InstructorController::class, 'addView'])->name('add');
+
+        Route::post('/instructors/add', [InstructorController::class, 'add'])->name('add');
 
         Route::get('/instructors/{id}', [InstructorController::class, 'show'])->name('show');
 
@@ -105,9 +113,45 @@ Route::name('arts.')->group(function () {
 
         Route::get('/arts', [ArtController::class, 'index'])->name('index');
 
-        Route::match(['get', 'post'],'/arts/create', [ArtController::class, 'create'])->name('create');
+        Route::get('/arts/add', [ArtController::class, 'addView'])->name('add');
+
+        Route::post('/arts/add', [ArtController::class, 'add'])->name('add');
 
         Route::get('/arts/{id}', [ArtController::class, 'show'])->name('show');
+
+
+    });
+});
+
+
+Route::name('schools.')->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
+
+        Route::get('/schools/add', [SchoolController::class, 'addView'])->name('add');
+
+        Route::post('/schools/add', [SchoolController::class, 'add'])->name('add');
+
+    });
+});
+
+
+Route::name('statuses.')->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
+
+        Route::get('/statuses/add', [StatusController::class, 'addView'])->name('add');
+
+        Route::post('/statuses/add', [StatusController::class, 'add'])->name('add');
+
+    });
+});
+
+
+Route::name('subscriptions.')->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
+
+        Route::get('/subscriptions/add', [SubscriptionController::class, 'addView'])->name('add');
+
+        Route::post('/subscriptions/add', [SubscriptionController::class, 'add'])->name('add');
 
 
     });

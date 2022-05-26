@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArtRequest;
 use App\Models\Art;
 use App\Models\Instructor;
+use App\Models\School;
 use Illuminate\Http\Request;
 
 class ArtController extends Controller
@@ -18,8 +20,14 @@ class ArtController extends Controller
         return view('arts.show', ['art' => Art::findOrFail($id), 'instructors' => Instructor::where('art_id', $id)->get()]);
     }
 
-    public function create()
+    public function addView()
     {
-        return view('arts.create');
+        return view('arts.add', ['schools' => School::all()]);
+    }
+
+    public function add(ArtRequest $request)
+    {
+        Art::create($request->validated());
+        return $this->returnWithMessage(config('messages.add_art_success'));
     }
 }

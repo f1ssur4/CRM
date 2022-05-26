@@ -29,25 +29,20 @@ class TaskController extends Controller
     {
         return $taskRequest->validated()
             ? $this->save($taskRequest)
-            : $this->redirectWithMessage(config('messages.create_task_error'));
+            : $this->returnWithMessage(config('messages.create_task_error'));
     }
 
     public function ready(Request $request)
     {
         //php artisan queue:work --queue=email,deleteTask
         ReadyTask::dispatch($request->post('id'), $request->user()->login);
-        return $this->redirectWithMessage();
+        return $this->returnWithMessage();
     }
 
     private function save(TaskRequest $taskRequest)
     {
         return Task::create($taskRequest->validated())
-            ? $this->redirectWithMessage(config('messages.create_task_success'))
-            : $this->redirectWithMessage(config('messages.create_task_error'));
-    }
-
-    private function redirectWithMessage($message = null): \Illuminate\Http\RedirectResponse
-    {
-        return back()->withErrors($message);
+            ? $this->returnWithMessage(config('messages.create_task_success'))
+            : $this->returnWithMessage(config('messages.create_task_error'));
     }
 }

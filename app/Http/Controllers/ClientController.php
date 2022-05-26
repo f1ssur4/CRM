@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+
     public function index()
     {
         return view('clients.index', ['clients' => Client::simplePaginate(10)]);
@@ -52,31 +53,28 @@ class ClientController extends Controller
 
     private function sortView()
     {
-        return view('clients.sorted', ['clients' => Client::orderBy(session('sortItem'))->simplePaginate(10)]);
+        return view('clients.sorted', ['clients' => Client::orderBy(session('sortItem'), session('sortLogic'))->simplePaginate(10)]);
     }
 
     public function sortBy(Request $request)
     {
         if (!is_null($request->post('sortItem'))) {
             session(['sortItem' => $request->post('sortItem')]);
+            session(['sortLogic' => $request->post('sortLogic')]);
             return $this->sortView();
         }
         return $this->sortView();
     }
 
-    private function returnWithMessage($message = null)
+
+    public function addView()
     {
-        return back()->withErrors($message);
+        return view('clients.add', ['statuses' => Status::all(), 'instructors' => Instructor::all()]);
     }
 
-    public function createView()
-    {
-        return view('clients.create', ['statuses' => Status::all(), 'instructors' => Instructor::all()]);
-    }
-
-    public function create(ClientRequest $request)
+    public function add(ClientRequest $request)
     {
         Client::create($request->validated());
-        return $this->returnWithMessage(config('messages.create_client_success'));
+        return $this->returnWithMessage(config('messages.add_client_success'));
     }
 }

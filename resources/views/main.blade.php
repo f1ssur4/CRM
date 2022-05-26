@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'main')
+@section('title', 'Main')
 
 @section('content')
     <h1 style="margin: 10px">Welcom to CRM</h1>
