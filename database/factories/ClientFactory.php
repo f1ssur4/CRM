@@ -20,7 +20,7 @@ class ClientFactory extends Factory
         return [
             'name' => $this->faker->firstName,
             'surname' => $this->faker->lastName,
-            'phone' => $this->faker->phoneNumber,
+            'phone' => rand(12342534234, 134324325235235),
             'advertising' => $array[array_rand(['inst', 'facebook', 'friend', 'website'])],
             'status_id' => rand(1,4),
             'instructor_id' => rand(1,15),

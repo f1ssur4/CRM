@@ -13,10 +13,12 @@ class Lesson extends Model
 
     public $timestamps = true;
 
-    public function teacher()
-    {
-        return $this->belongsTo(Instructor::class, 'teacher_id');
-    }
+    protected $fillable = [
+        'client_id',
+        'date',
+        'time'
+    ];
+
 
     public function client()
     {

@@ -18,9 +18,9 @@ class LessonFactory extends Factory
     public function definition()
     {
         return [
-            'client_id' => rand(1,11),
-            'instructor_id' => rand(1,15),
-            'start_time' => $this->faker->dateTime
+            'client_id' => rand(1,15),
+            'date' => $this->faker->date,
+            'time' => $this->faker->time,
         ];
     }
 }

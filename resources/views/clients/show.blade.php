@@ -75,8 +75,9 @@
                         <input hidden name="id" value="@php echo $client->id @endphp">
                         <select style="margin-top: 5px" name="subscription">
                             <option selected disabled>subscription</option>
-                        @foreach($subscriptions as $subscription)
-                            <option  value="@php echo $subscription->id @endphp">@php echo $subscription->title . ', минут:' . $subscription->minutes . ', кол-во уроков:' . $subscription->count_lessons . ', цена:' . $subscription->price @endphp</option>
+                            @foreach($subscriptions as $subscription)
+                                <option
+                                    value="@php echo $subscription->id @endphp">@php echo $subscription->title . ', минут:' . $subscription->minutes . ', кол-во уроков:' . $subscription->count_lessons . ', цена:' . $subscription->price @endphp</option>
                             @endforeach
                         </select>
                         <button class="btn btn-primary" type="submit">Добавить</button>

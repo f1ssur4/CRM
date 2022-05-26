@@ -20,7 +20,7 @@ class InstructorFactory extends Factory
         return [
             'name' => $this->faker->firstName,
             'surname' => $this->faker->lastName,
-            'phone' => $this->faker->phoneNumber,
+            'phone' => rand(12342534234, 134324325235235),
             'description' => $this->faker->text,
             'art_id' => rand(1,10)
         ];

@@ -11,6 +11,7 @@ return [
     'add_school_success' => ['add_school_success' => 'Школа успешно добавлена'],
     'add_subscription_success' => ['add_subscription_success' => 'Абонемент успешно добавлен'],
     'add_status_success' => ['add_status_success' => 'Статус успешно добавлен'],
+    'add_lesson_success' => ['add_lesson_success' => 'Урок успешно добавлен'],
     'login_success' => ['logins_success' => 'Вы успешно вошли в CRM'],
     'update_client_success' => ['update_client_success' => 'Данные успешно обновлены'],
     'update_client_error' => ['update_client_error' => 'Не удалось обновить данные'],

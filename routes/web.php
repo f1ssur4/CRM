@@ -1,15 +1,16 @@
 <?php
 
+use App\Http\Controllers\ArtController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\InfoController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ArtController;
-use \App\Http\Controllers\SchoolController;
-use App\Http\Controllers\StatusController;
-use App\Http\Controllers\InfoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -158,16 +159,25 @@ Route::name('subscriptions.')->group(function () {
 });
 
 
+Route::name('lessons.')->group(function () {
+    Route::middleware('auth')->group(function () {
+
+        Route::get('/lessons', [LessonController::class, 'index'])->name('index');
+
+        Route::post('/lessons/add', [LessonController::class, 'add'])->name('add');
+
+        Route::post('/lessons/delete', [LessonController::class, 'delete'])->name('delete');
+
+
+    });
+
+});
+
+
 Route::get('/statistics', function () {
     //
 })->name('statistics');
 
-Route::name('lessons.')->group(function () {
 
-    Route::get('/lessons', function () {
-        return 123;
-    })->middleware('auth')->name('main');
-
-});
 
 
