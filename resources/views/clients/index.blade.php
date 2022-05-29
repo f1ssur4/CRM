@@ -3,24 +3,6 @@
 
 @section('content')
     <p><h1 style="margin-left: 10px">Table of clients</h1>
-    <div style="margin: 50px">
-        <form action="{{route('clients.sort')}}" method='post'>
-            @csrf
-        <select name="sortItem">
-            <option disabled selected >выберете сортировку</option>
-            <option value="status_id">По статусу</option>
-            <option value="advertising">По рекламе</option>
-            <option value="name">По имени</option>
-            <option value="created_at">По дате добавления</option>
-        </select>
-            <select name="sortLogic">
-                <option disabled selected >по возрастанию/убыванию</option>
-                <option value="asc">По возрастанию</option>
-                <option value="desc">По убыванию</option>
-            </select>
-        <button type="submit">Сортировать</button>
-        </form>
-    </div>
     <div><table class="table" style="margin-top: 2em; width: auto">
         <thead>
         <tr>

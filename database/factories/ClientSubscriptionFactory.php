@@ -17,8 +17,7 @@ class ClientSubscriptionFactory extends Factory
     public function definition()
     {
         return [
-            'client_id' => $this->faker->numberBetween(1,15),
-            'subscription_id' => $this->faker->numberBetween(1,7),
+            //
         ];
     }
 }

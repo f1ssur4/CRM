@@ -11,6 +11,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,8 +75,6 @@ Route::name('clients.')->group(function () {
     Route::middleware(['auth', 'authorize'])->group(function () {
 
         Route::get('/clients', [ClientController::class, 'index'])->name('index');
-
-        Route::match(['post', 'get'], '/clients/sort', [ClientController::class, 'sortBy'])->name('sort');
 
         Route::get('/clients/add', [ClientController::class, 'addView'])->name('add');
 
@@ -164,9 +163,9 @@ Route::name('lessons.')->group(function () {
 
         Route::get('/lessons', [LessonController::class, 'index'])->name('index');
 
-        Route::post('/lessons/add', [LessonController::class, 'add'])->name('add');
+        Route::post('/lessons/add', [LessonController::class, 'add'])->middleware('authorize')->name('add');
 
-        Route::post('/lessons/delete', [LessonController::class, 'delete'])->name('delete');
+        Route::post('/lessons/delete', [LessonController::class, 'deleteManually'])->middleware('authorize')->name('delete');
 
 
     });
@@ -174,9 +173,16 @@ Route::name('lessons.')->group(function () {
 });
 
 
-Route::get('/statistics', function () {
-    //
-})->name('statistics');
+Route::name('subscriptions.')->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
+
+        Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics');
+
+    });
+});
+
+
+
 
 
 

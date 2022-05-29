@@ -12,6 +12,7 @@ return [
     'add_subscription_success' => ['add_subscription_success' => 'Абонемент успешно добавлен'],
     'add_status_success' => ['add_status_success' => 'Статус успешно добавлен'],
     'add_lesson_success' => ['add_lesson_success' => 'Урок успешно добавлен'],
+    'delete_lesson_success' => ['delete_lesson_success' => 'Урок успешно удален'],
     'login_success' => ['logins_success' => 'Вы успешно вошли в CRM'],
     'update_client_success' => ['update_client_success' => 'Данные успешно обновлены'],
     'update_client_error' => ['update_client_error' => 'Не удалось обновить данные'],
@@ -20,5 +21,6 @@ return [
     'error_auth' => ['error_auth' => 'Для начала нужно аутентифицироваться'],
     'error_login' => ['error_login' => 'Не удалось аутентифицировать пользователя'],
     'error_validation' => ['error_validation' => 'Неверный логин или пароль'],
+    'mail_start_lesson' => ['mail_start_lesson' => 'Your lesson will start in 1 hour, at ']
 
 ];

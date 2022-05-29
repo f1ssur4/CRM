@@ -7,23 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class TasksResultMail extends Mailable
+class NewLessonMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $username;
-    protected $task;
+    private $message;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($username, $task)
+    public function __construct($message)
     {
-        $this->username = $username;
-        $this->task = $task;
+        $this->message = $message;
     }
-
 
     /**
      * Build the message.
@@ -32,6 +29,6 @@ class TasksResultMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.result-task', ['username' => $this->username, 'task' => $this->task]);
+        return $this->view('mail.lesson', ['info_about_lesson' => $this->message]);
     }
 }

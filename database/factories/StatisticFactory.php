@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lesson>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Statistic>
  */
-class LessonFactory extends Factory
+class StatisticFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +17,9 @@ class LessonFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'subscriptions' => 0,
+            'lessons' => 0,
+            'income' => 0,
         ];
     }
 }

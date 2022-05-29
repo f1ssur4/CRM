@@ -4,9 +4,10 @@ namespace App\Providers;
 
 use App\Events\AddSubscription;
 use App\Events\ReadyTask;
-use App\Listeners\SendNewSubscription;
+use App\Listeners\SendMailNewSubscription;
 use App\Listeners\DeleteTask;
 use App\Listeners\SendTasksResult;
+use App\Listeners\UpdateStatisticSubscriptionsIncome;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -28,8 +29,9 @@ class EventServiceProvider extends ServiceProvider
             DeleteTask::class
         ],
         AddSubscription::class => [
-            SendNewSubscription::class
-        ]
+            SendMailNewSubscription::class,
+            UpdateStatisticSubscriptionsIncome::class
+        ],
     ];
 
     /**

@@ -37,35 +37,19 @@ class ClientController extends Controller
     public function addSubscription(Request $request)
     {
         Client::find($request->post('id'))->subscriptions()->attach($request->post('subscription'));
-        $this->sendMailJob($request);
+        $this->sendMailJob($request->post('subscription'), $request);
         return $this->returnWithMessage(config('messages.add_subscription_success'));
     }
 
     // php artisan queue:work --queue=new_subscription  or  php artisan queue:work --queue=email,deleteTask,new_subscription
-    private function sendMailJob($request)
+    private function sendMailJob($subscriptionId, $request)
     {
         AddSubscription::dispatch(
             $request->user()->login,
             Client::getNameSurnameById($request->post('id')),
-            Subscription::getSubscriptionFullData($request->post('subscription'))
+            Subscription::getDataById($subscriptionId)
         );
     }
-
-    private function sortView()
-    {
-        return view('clients.sorted', ['clients' => Client::orderBy(session('sortItem'), session('sortLogic'))->simplePaginate(10)]);
-    }
-
-    public function sortBy(Request $request)
-    {
-        if (!is_null($request->post('sortItem'))) {
-            session(['sortItem' => $request->post('sortItem')]);
-            session(['sortLogic' => $request->post('sortLogic')]);
-            return $this->sortView();
-        }
-        return $this->sortView();
-    }
-
 
     public function addView()
     {

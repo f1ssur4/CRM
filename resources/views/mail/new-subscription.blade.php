@@ -1,1 +1,1 @@
-@php echo $username @endphp added subscription: @php echo $subscription @endphp for: @php echo $client_name @endphp
+@php echo $username @endphp added subscription: @php echo $subscription[0]->title . ', lesson duration: ' . $subscription[0]->minutes . ' min, count lessons: ' . $subscription[0]->count_lessons . ', price: ' . $subscription[0]->price @endphp for: @php echo $client_name @endphp

@@ -15,8 +15,7 @@ class Lesson extends Model
 
     protected $fillable = [
         'client_id',
-        'date',
-        'time'
+        'start_time'
     ];
 
 

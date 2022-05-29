@@ -25,8 +25,7 @@ class CreateLessonRequest extends FormRequest
     {
         return [
             'client_id' => 'required|numeric',
-            'time' => 'required',
-            'date' => 'required'
+            'start_time' => 'required',
         ];
     }
 }

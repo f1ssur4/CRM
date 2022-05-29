@@ -7,19 +7,19 @@
         <h3><b>Записать клиента на урок</b></h3>
         <form action="{{route('lessons.add')}}" method="post">
             @csrf
-            <input name="date" type="date">
-            @error('date')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <input name="time" type="time">
-            @error('time')
+{{--            <input name="date" type="date">--}}
+{{--            @error('date')--}}
+{{--            <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--            @enderror--}}
+            <input name="start_time" type="datetime-local">
+            @error('start_time')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <select name="client_id">
                 <option selected hidden>choose client</option>
                 @foreach($clients as $client)
                     <option
-                        value="@php echo $client->id @endphp">@php echo $client->name . ' ' . $client->surname @endphp</option>
+                        value="@php echo $client[0]->id @endphp">@php echo $client[0]->name . ' ' .$client[0]->surname @endphp</option>
                 @endforeach
             </select>
             @error('client_id')
@@ -29,6 +29,9 @@
         </form>
         @error('add_lesson_success')
         <div class="alert alert-success">{{$message}}</div>
+        @enderror
+            @error('delete_lesson_success')
+        <div class="alert alert-warning">{{$message}}</div>
         @enderror
     </div>
     @endif
@@ -53,12 +56,15 @@
                     <td>@php echo $lesson->client->instructor->name .' '. $lesson->client->instructor->surname   @endphp</td>
                     <td>@php echo $lesson->client->instructor->art->title @endphp</td>
                     <td>@php echo $lesson->client->instructor->art->school->address @endphp</td>
-                    <td>@php echo $lesson->date . ' ' . $lesson->time @endphp</td>
+                    <td>@php echo $lesson->start_time @endphp</td>
                     <td>@php echo $lesson->client->subscriptions->last()->minutes . 'min'  @endphp</td>
+                    @if(\Illuminate\Support\Facades\Gate::check('admin1') || \Illuminate\Support\Facades\Gate::check('admin2'))
+
                     <form action="{{route('lessons.delete')}}" method="post">
                         @csrf
                     <td><button name="id" value="@php echo $lesson->id@endphp">Удалить урок</button></td>
                     </form>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

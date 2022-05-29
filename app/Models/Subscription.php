@@ -25,10 +25,8 @@ class Subscription extends Model
             ->withTimestamps();
     }
 
-    public static function getSubscriptionFullData($id)
+    public static function getDataById($id)
     {
-        return self::where('id', $id)->get()->map(function($subs) {
-            return $subs->title . ' ' . $subs->minutes . ' ' . $subs->count_lessons . ' ' . $subs->price;
-        })[0];
+        return self::where('id', $id)->get();
     }
 }

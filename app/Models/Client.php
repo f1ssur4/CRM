@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Http\Requests\ClientUpdateRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Client extends Model
 {
@@ -23,6 +23,7 @@ class Client extends Model
     ];
 
     public $timestamps = true;
+
 
     public function status()
     {
@@ -43,14 +44,25 @@ class Client extends Model
 
     public static function edit($validated_data)
     {
-       return Client::where('id', $validated_data['id'])->update($validated_data);
+        return Client::where('id', $validated_data['id'])->update($validated_data);
     }
 
-    public static function getNameSurnameById($id)
+    public static function getNameSurnameById($data)
     {
-       return self::where('id', $id)->get()
+        return self::where('id', $data)->get()
             ->map(function ($client) {
                 return $client->name . ' ' . $client->surname;
             })[0];
     }
+
+    public static function getClientIdWithSub()
+    {
+        $clients = [];
+        $clients_subs = DB::table('clients_subscriptions')->groupBy('client_id')->distinct()->get('client_id');
+        foreach ($clients_subs as $client_sub) {
+            $clients[] = self::where('id', $client_sub->client_id)->get();
+        }
+        return $clients;
+    }
+
 }
