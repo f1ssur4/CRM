@@ -3,7 +3,12 @@
 
 @section('content')
     <p><h1 style="margin-left: 10px">Table of clients</h1>
-    <div><table class="table" style="margin-top: 2em; width: auto">
+    <div>
+        <form action="{{route('clients.search')}}" method="get">
+            <input name="name" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <table class="table" style="margin-top: 2em; width: auto">
         <thead>
         <tr>
             <th scope="col">Name</th>
@@ -29,7 +34,7 @@
             @endforeach
         </tbody>
     </table>
-        {{$clients->links()}}
+        {{$clients->appends(['clients' => request()->name])->links()}}
     </div>
 
 @endsection

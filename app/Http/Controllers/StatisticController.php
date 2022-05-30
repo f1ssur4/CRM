@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Statistic;
-use Illuminate\Http\Request;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 
 class StatisticController extends Controller
 {
@@ -11,4 +11,11 @@ class StatisticController extends Controller
     {
         return view('statistic.index', ['statistic' => Statistic::all()]);
     }
+
+    public function convert()
+    {
+        $pdf = SnappyPdf::loadView('statistic.data', ['statistic' => Statistic::all()]);
+        return $pdf->download('statistic.pdf');
+    }
+
 }

@@ -80,6 +80,8 @@ Route::name('clients.')->group(function () {
 
         Route::post('/clients/add', [ClientController::class, 'add'])->name('add');
 
+        Route::get('/clients/search', [ClientController::class, 'search'])->name('search');
+
         Route::get('/clients/{id}', [ClientController::class, 'show'])->name('show');
 
         Route::post('/clients/update', [ClientController::class, 'update'])->name('update');
@@ -173,10 +175,12 @@ Route::name('lessons.')->group(function () {
 });
 
 
-Route::name('subscriptions.')->group(function () {
+Route::name('statistic.')->group(function () {
     Route::middleware(['auth', 'authorize'])->group(function () {
 
-        Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics');
+        Route::get('/statistic', [StatisticController::class, 'index'])->name('index');
+
+        Route::get('/statistic/convert', [StatisticController::class, 'convert'])->name('convert');
 
     });
 });

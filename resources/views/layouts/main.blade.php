@@ -51,7 +51,7 @@
                             <a class="nav-link" href="{{route('clients.index')}}">Clients</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/statistics">Statistic</a>
+                            <a class="nav-link" href="{{route('statistic.index')}}">Statistic</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.create') }}">Create user</a>

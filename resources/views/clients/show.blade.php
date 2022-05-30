@@ -73,7 +73,7 @@
                     <div style="margin-left: 700px">
                         <h4>Добавить абонемент</h4>
                         <input hidden name="id" value="@php echo $client->id @endphp">
-                        <select style="margin-top: 5px" name="subscription">
+                        <select required style="margin-top: 5px" name="subscription">
                             <option selected disabled>subscription</option>
                             @foreach($subscriptions as $subscription)
                                 <option
