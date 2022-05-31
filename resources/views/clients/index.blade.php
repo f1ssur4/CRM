@@ -3,7 +3,7 @@
 
 @section('content')
     <p><h1 style="margin-left: 10px">Table of clients</h1>
-    <div>
+    <div style="margin: 10px">
         <form action="{{route('clients.search')}}" method="get">
             <input name="name" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>

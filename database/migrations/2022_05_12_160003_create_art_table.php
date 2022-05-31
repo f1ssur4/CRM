@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('arts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('school_id')->constrained('schools');
+            $table->foreignId('school_id')->nullable()->constrained('schools')->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('surname');
             $table->string('phone')->unique();
             $table->text('description');
-            $table->foreignId('art_id')->constrained('arts');
+            $table->foreignId('art_id');
             $table->timestamps();
         });
     }

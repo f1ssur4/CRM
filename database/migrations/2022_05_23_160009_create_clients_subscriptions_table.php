@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('clients_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
-            $table->foreignId('subscription_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
+            $table->foreignId('client_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('subscription_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

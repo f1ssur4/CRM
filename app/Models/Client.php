@@ -41,7 +41,6 @@ class Client extends Model
         return $this->belongsTo(Instructor::class, 'instructor_id');
     }
 
-
     public static function edit($validated_data)
     {
         return Client::where('id', $validated_data['id'])->update($validated_data);

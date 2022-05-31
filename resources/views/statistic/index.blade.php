@@ -21,6 +21,10 @@
             </tr>
             </tbody>
         </table>
+        @error('statistic_cleanOff_success')
+        <div class="alert alert-success">{{$message}}</div>
+        @enderror
+        <a class="btn btn-primary" href="{{route('statistic.clean-off')}}">Очистить статистику</a>
         <a class="btn btn-primary" href='/statistic/convert'>Скачать статистику в формате PDF</a>
     </div>
 @endsection

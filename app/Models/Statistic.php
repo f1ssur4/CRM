@@ -11,6 +11,11 @@ class Statistic extends Model
     use HasFactory;
 
     protected $table = "statistic";
+    protected $fillable = [
+        'subscriptions',
+        'lessons',
+        'income'
+    ];
 
 
 

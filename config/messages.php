@@ -13,6 +13,7 @@ return [
     'add_status_success' => ['add_status_success' => 'Статус успешно добавлен'],
     'add_lesson_success' => ['add_lesson_success' => 'Урок успешно добавлен'],
     'delete_lesson_success' => ['delete_lesson_success' => 'Урок успешно удален'],
+    'statistic_cleanOff_success' => ['statistic_cleanOff_success' => 'Данные успешно сброшены'],
     'login_success' => ['logins_success' => 'Вы успешно вошли в CRM'],
     'update_client_success' => ['update_client_success' => 'Данные успешно обновлены'],
     'update_client_error' => ['update_client_error' => 'Не удалось обновить данные'],

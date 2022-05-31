@@ -18,4 +18,14 @@ class StatisticController extends Controller
         return $pdf->download('statistic.pdf');
     }
 
+    public function cleanOff()
+    {
+        Statistic::find(1)->update([
+            'subscriptions' => 0,
+            'lessons' => 0,
+            'income' => 0,
+            ]);
+        return $this->returnWithMessage(config('messages.statistic_cleanOff_success'));
+    }
+
 }

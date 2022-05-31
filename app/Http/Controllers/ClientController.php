@@ -10,7 +10,6 @@ use App\Models\Instructor;
 use App\Models\Status;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -36,7 +35,10 @@ class ClientController extends Controller
 
     public function search(Request $request)
     {
-        $result = Client::query()->where('name', 'LIKE' ,"%{$request->name}%")->orWhere('surname', 'LIKE' ,"%{$request->name}%")->orderBy('name')->simplePaginate(10);
+        $result = Client::where('name', 'LIKE' ,"%{$request->name}%")
+            ->orWhere('surname', 'LIKE' ,"%{$request->name}%")
+            ->orderBy('name')
+            ->simplePaginate(10);
         return view('clients.index', ['clients' => $result]);
     }
 
@@ -58,7 +60,6 @@ class ClientController extends Controller
         return $this->returnWithMessage(config('messages.add_client_success'));
     }
 
-    // php artisan queue:work --queue=new_subscription  or  php artisan queue:work --queue=email,deleteTask,new_subscription
     private function sendMailJob($subscriptionId, $request)
     {
         AddSubscription::dispatch(

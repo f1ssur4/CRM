@@ -182,6 +182,8 @@ Route::name('statistic.')->group(function () {
 
         Route::get('/statistic/convert', [StatisticController::class, 'convert'])->name('convert');
 
+        Route::get('/statistic/clean-off', [StatisticController::class, 'cleanOff'])->name('clean-off');
+
     });
 });
 

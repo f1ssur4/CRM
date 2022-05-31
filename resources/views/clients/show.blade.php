@@ -7,7 +7,7 @@
         <table class="table" style="margin-top: 2em; width: 900px; margin-left: 250px; size: 1000px">
             <thead>
             <tr>
-                <th scope="col">Id</th>
+                <th scope="col"></th>
                 <th scope="col">Name</th>
                 <th scope="col">Surname</th>
                 <th scope="col">Phone</th>
@@ -19,10 +19,7 @@
             <form action="{{route('clients.update')}}" method="POST">
                 @csrf
                 <tr>
-                    <td><select name="id">
-                            <option selected
-                                    value="@php echo $client->id @endphp">@php echo $client->id @endphp</option>
-                        </select></td>
+                    <td><input hidden name="id" value="@php echo $client->id @endphp"></td>
                     <td> @php echo $client->name @endphp</td>
                     <td> @php echo $client->surname @endphp</td>
                     <td><input name="phone" value="@php echo $client->phone @endphp"></td>

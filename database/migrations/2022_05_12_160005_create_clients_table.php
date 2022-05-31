@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('advertising');
             $table->text('comment')->nullable();
-            $table->foreignId('status_id')->constrained('statuses');
-            $table->foreignId('instructor_id')->constrained('instructors');
+            $table->foreignId('status_id')->nullable()->constrained('statuses')->nullOnDelete();
+            $table->foreignId('instructor_id')->nullable()->constrained('instructors')->nullOnDelete();
             $table->timestamps();
         });
     }

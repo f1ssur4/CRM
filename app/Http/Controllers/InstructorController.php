@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\InsctructorUpdateRequest;
+use App\Http\Requests\InstructorUpdateRequest;
 use App\Http\Requests\InstructorRequest;
 use App\Models\Art;
 use App\Models\Instructor;
@@ -22,7 +22,7 @@ class InstructorController extends Controller
         ]);
     }
 
-    public function update(InsctructorUpdateRequest $request)
+    public function update(InstructorUpdateRequest $request)
     {
         Instructor::edit($request->validated());
         return $this->returnWithMessage(config('messages.update_client_success'));
