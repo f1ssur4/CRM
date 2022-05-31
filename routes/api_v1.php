@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use \App\Http\Controllers\Api\V1\InstructorController;
+use App\Http\Controllers\Api\V1\ArtController;
+use App\Http\Controllers\Api\V1\SchoolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResources([
     'instructors' => InstructorController::class,
+    'arts' => ArtController::class,
+    'schools' => SchoolController::class,
 ]);
