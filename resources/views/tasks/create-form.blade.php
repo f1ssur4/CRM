@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Admin tasks')
+@section('title', 'Tasks')
 
 @section('content')
 

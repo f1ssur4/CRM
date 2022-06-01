@@ -2,7 +2,7 @@
 @section('title', 'Clients')
 
 @section('content')
-    <a class="btn btn-primary" style="margin-left: 20px" href="{{route('clients.index')}}">Вернуться к списку</a>
+    <a class="btn btn-primary" style="margin-left: 20px" href="{{route('clients.index')}}">Back to list</a>
     <div>
         <table class="table" style="margin-top: 2em; width: 900px; margin-left: 250px; size: 1000px">
             <thead>
@@ -32,7 +32,7 @@
                             @endforeach
                         </select></td>
                     <td>
-                        <button class="btn btn-primary" type="submit">Обновить</button>
+                        <button class="btn btn-primary" type="submit">Update</button>
                     </td>
                 </tr>
             </tbody>
@@ -64,27 +64,27 @@
                 <div class="alert alert-success">{{ $message }}</div>
                 @enderror
 
-                <h2>История абонементов</h2>
+                <h2>Subscriptions history</h2>
                 <form action="{{route('clients.add-subs')}}" method="POST">
                     @csrf
                     <div style="margin-left: 700px">
-                        <h4>Добавить абонемент</h4>
+                        <h4>Add subscription</h4>
                         <input hidden name="id" value="@php echo $client->id @endphp">
                         <select required style="margin-top: 5px" name="subscription">
                             <option selected disabled>subscription</option>
                             @foreach($subscriptions as $subscription)
                                 <option
-                                    value="@php echo $subscription->id @endphp">@php echo $subscription->title . ', минут:' . $subscription->minutes . ', кол-во уроков:' . $subscription->count_lessons . ', цена:' . $subscription->price @endphp</option>
+                                    value="@php echo $subscription->id @endphp">@php echo $subscription->title . ', minutes:' . $subscription->minutes . ', count lessons:' . $subscription->count_lessons . ', price:' . $subscription->price @endphp</option>
                             @endforeach
                         </select>
-                        <button class="btn btn-primary" type="submit">Добавить</button>
+                        <button class="btn btn-primary" type="submit">Add</button>
                     </div>
                 </form>
                 <table class="table">
                     <tbody>
                     @foreach($client->subscriptions as $sub)
                         <tr>
-                            <td> @php echo $sub->title . ', ' .' минут: ' . $sub->minutes . ', ' .'кол-во уроков: ' . $sub->count_lessons .', цена: ' . $sub->price  @endphp</td>
+                            <td> @php echo $sub->title . ', ' .' minutes: ' . $sub->minutes . ', ' .'count lessons: ' . $sub->count_lessons .', price: ' . $sub->price  @endphp</td>
                         </tr>
                     @endforeach
                     </tbody>

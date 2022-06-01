@@ -21,7 +21,7 @@
                     <td>@php echo $instructor->phone @endphp</td>
                     <td>@php echo $instructor->art->title @endphp</td>
                     <td>@php echo $instructor->art->school->address @endphp</td>
-                    <td><a href="/instructors/@php echo $instructor->id @endphp">посмотреть учителя</a></td>
+                    <td><a href="/instructors/@php echo $instructor->id @endphp">show more</a></td>
                 </tr>
             @endforeach
             </tbody>

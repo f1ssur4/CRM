@@ -39,6 +39,6 @@ class whichStatusId implements Rule
      */
     public function message()
     {
-        return 'Это поле обязательно к заполнению';
+        return 'This field is required';
     }
 }

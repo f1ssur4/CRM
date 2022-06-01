@@ -7,7 +7,7 @@ use App\Jobs\ProcessLessonDelete;
 use App\Jobs\ProcessLessonMail;
 use App\Models\Client;
 use App\Models\Lesson;
-use App\Models\Statistic;
+use App\Models\Statistics;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,14 +23,14 @@ class LessonController extends Controller
     {
         $lesson = Lesson::create($request->validated());
         $this->startJobs($lesson);
-        Statistic::updateLessonsIncrement();
+        Statistics::updateLessonsIncrement();
         return $this->returnWithMessage(config('messages.add_lesson_success'));
     }
 
     public function deleteManually(Request $request)
     {
         Lesson::destroy($request->post('id'));
-        Statistic::updateLessonsDecrement();
+        Statistics::updateLessonsDecrement();
         return $this->returnWithMessage(config('messages.delete_lesson_success'));
     }
 

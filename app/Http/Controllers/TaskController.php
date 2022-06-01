@@ -34,7 +34,6 @@ class TaskController extends Controller
 
     public function ready(Request $request)
     {
-        //php artisan queue:work --queue=email,deleteTask
         ReadyTask::dispatch($request->post('id'), $request->user()->login);
         return $this->returnWithMessage();
     }

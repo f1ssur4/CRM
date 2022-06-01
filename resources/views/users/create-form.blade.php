@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'create')
+@section('title', 'Users')
 
 @section('content')
     <h1 style="margin: 10px">Create new user</h1>

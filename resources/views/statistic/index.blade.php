@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Statistic')
+@section('title', 'Statistics')
 
 @section('content')
     <div style="margin: 10px">
@@ -24,8 +24,8 @@
         @error('statistic_cleanOff_success')
         <div class="alert alert-success">{{$message}}</div>
         @enderror
-        <a class="btn btn-primary" href="{{route('statistic.clean-off')}}">Очистить статистику</a>
-        <a class="btn btn-primary" href='/statistic/convert'>Скачать статистику в формате PDF</a>
+        <a class="btn btn-primary" href="{{route('statistic.clean-off')}}">Clear statistics</a>
+        <a class="btn btn-primary" href='/statistic/convert'>Download statistics in PDF</a>
     </div>
 @endsection
 

@@ -57,7 +57,7 @@
                         <option selected disabled>choose status</option>
                         @foreach($statuses as $status)
                             <option value="@php echo $status->id @endphp">@php echo $status->title @endphp</option>
-                            @endforeach
+                        @endforeach
                     </select>
                     @error('status_id')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -67,7 +67,8 @@
                     <select name="instructor_id">
                         <option selected disabled>choose instructor</option>
                         @foreach($instructors as $instructor)
-                            <option value="@php echo $instructor->id @endphp">@php echo $instructor->name . ' ' . $instructor->surname . ' ' . $instructor->art->title@endphp</option>
+                            <option
+                                value="@php echo $instructor->id @endphp">@php echo $instructor->name . ' ' . $instructor->surname . ' ' . $instructor->art->title@endphp</option>
                         @endforeach
                     </select>
                     @error('instructor_id')
@@ -75,7 +76,7 @@
                     @enderror
                 </div>
                 <div style="margin-top: 10px">
-                <button class="btn btn-success" type="submit">Add</button>
+                    <button class="btn btn-success" type="submit">Add</button>
                 </div>
             </div>
         </form>

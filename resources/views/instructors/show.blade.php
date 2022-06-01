@@ -2,7 +2,7 @@
 @section('title', 'Instructor')
 
 @section('content')
-    <a class="btn btn-primary" style="margin-left: 20px" href="{{route('instructors.index')}}">Вернуться к списку</a>
+    <a class="btn btn-primary" style="margin-left: 20px" href="{{route('instructors.index')}}">Back to list</a>
     <div>
         <table class="table" style="margin-top: 2em; width: 900px; margin-left: 250px; size: 1000px">
             <thead>

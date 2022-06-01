@@ -4,13 +4,9 @@
 @section('content')
     @if(\Illuminate\Support\Facades\Gate::check('admin1') || \Illuminate\Support\Facades\Gate::check('admin2'))
         <div style="margin-left: 100px; margin-top: 45px;">
-        <h3><b>Записать клиента на урок</b></h3>
+        <h3><b>Register a client for a lesson</b></h3>
         <form action="{{route('lessons.add')}}" method="post">
             @csrf
-{{--            <input name="date" type="date">--}}
-{{--            @error('date')--}}
-{{--            <div class="alert alert-danger">{{ $message }}</div>--}}
-{{--            @enderror--}}
             <input name="start_time" type="datetime-local">
             @error('start_time')
             <div class="alert alert-danger">{{ $message }}</div>
@@ -25,7 +21,7 @@
             @error('client_id')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <button class="btn btn-primary" type="submit">Записать</button>
+            <button class="btn btn-primary" type="submit">Register</button>
         </form>
         @error('add_lesson_success')
         <div class="alert alert-success">{{$message}}</div>
@@ -62,7 +58,7 @@
 
                     <form action="{{route('lessons.delete')}}" method="post">
                         @csrf
-                    <td><button name="id" value="@php echo $lesson->id@endphp">Удалить урок</button></td>
+                    <td><button name="id" value="@php echo $lesson->id@endphp">Delete lesson</button></td>
                     </form>
                     @endif
                 </tr>

@@ -23,7 +23,7 @@
                     <select name="school_id">
                         <option selected disabled>choose school</option>
                         @foreach($schools as $school)
-                        <option value="@php echo $school->id @endphp">@php echo $school->address @endphp</option>
+                            <option value="@php echo $school->id @endphp">@php echo $school->address @endphp</option>
                         @endforeach
                     </select>
                     @error('school_id')

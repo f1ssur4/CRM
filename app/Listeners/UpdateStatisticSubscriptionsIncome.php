@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Models\Statistic;
+use App\Models\Statistics;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +27,7 @@ class UpdateStatisticSubscriptionsIncome
      */
     public function handle($event)
     {
-        Statistic::updateSubscriptions();
-        Statistic::updateIncome($event->subscription[0]->price);
+        Statistics::updateSubscriptions();
+        Statistics::updateIncome($event->subscription[0]->price);
     }
 }
