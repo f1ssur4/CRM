@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientRequestController;
 use App\Http\Controllers\ArtController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InfoController;
@@ -30,6 +31,7 @@ Route::view('/', 'main')->name('/');
 Route::view('/workboard', 'workboard')->middleware(['auth', 'authorize'])->name('workboard');
 
 Route::get('/info', [InfoController::class, 'index'])->middleware(['auth', 'authorize'])->name('info');
+
 
 
 Route::name('users.')->group(function () {
@@ -183,6 +185,17 @@ Route::name('statistic.')->group(function () {
         Route::get('/statistic/convert', [StatisticController::class, 'convert'])->name('convert');
 
         Route::get('/statistic/clean-off', [StatisticController::class, 'cleanOff'])->name('clean-off');
+
+    });
+});
+
+
+Route::name('requests.')->group(function () {
+    Route::middleware(['auth', 'authorize'])->group(function () {
+
+        Route::get('/requests', [ClientRequestController::class, 'index'])->name('index');
+
+        Route::get('/requests/delete/{id}', [ClientRequestController::class, 'delete'])->name('delete');
 
     });
 });

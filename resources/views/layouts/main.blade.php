@@ -59,6 +59,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('info') }}">General information</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('requests.index') }}">Requests</a>
+                        </li>
 
                     @endif
                     @if(\Illuminate\Support\Facades\Auth::check())

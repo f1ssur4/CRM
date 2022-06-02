@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\ClientSubscription;
 use App\Models\Instructor;
 use App\Models\Lesson;
+use App\Models\ClientRequest;
 use App\Models\School;
 use App\Models\Statistics;
 use App\Models\Status;
@@ -35,5 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call([UserSeeder::class]);
         $this->call([SubscriptionSeeder::class]);
         Statistics::factory(1)->create();
+        ClientRequest::factory(4)->create();
     }
 }

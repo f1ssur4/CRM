@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArtRequest;
 use App\Http\Resources\ArtResource;
 use App\Models\Art;
-use Illuminate\Http\Request;
 
 class ArtController extends Controller
 {

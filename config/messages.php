@@ -13,6 +13,7 @@ return [
     'add_status_success' => ['add_status_success' => 'Status successfully added'],
     'add_lesson_success' => ['add_lesson_success' => 'Lesson successfully added'],
     'delete_lesson_success' => ['delete_lesson_success' => 'Lesson successfully deleted'],
+    'delete_request_success' => ['delete_request_success' => 'Request successfully deleted'],
     'statistic_cleanOff_success' => ['statistic_cleanOff_success' => 'Data reset successfully'],
     'login_success' => ['logins_success' => 'You have successfully logged into CRM'],
     'update_client_success' => ['update_client_success' => 'Data updated successfully'],
