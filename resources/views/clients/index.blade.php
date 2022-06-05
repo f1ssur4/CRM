@@ -36,7 +36,7 @@
             @endforeach
             </tbody>
         </table>
-        {{$clients->appends(['clients' => request()->name])->links()}}
+        {{$clients->links()}}
     </div>
 
 @endsection

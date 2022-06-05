@@ -9,13 +9,13 @@ class StatisticController extends Controller
 {
     public function index()
     {
-        return view('statistic.index', ['statistic' => Statistics::all()]);
+        return view('statistics.index', ['statistics' => Statistics::all()]);
     }
 
     public function convert()
     {
-        $pdf = SnappyPdf::loadView('statistic.data', ['statistic' => Statistics::all()]);
-        return $pdf->download('statistic.pdf');
+        $pdf = SnappyPdf::loadView('statistics.data', ['statistics' => Statistics::all()]);
+        return $pdf->download('statistics.pdf');
     }
 
     public function cleanOff()
@@ -25,7 +25,7 @@ class StatisticController extends Controller
             'lessons' => 0,
             'income' => 0,
             ]);
-        return $this->returnWithMessage(config('messages.statistic_cleanOff_success'));
+        return $this->returnWithMessage(config('messages.statistics_cleanOff_success'));
     }
 
 }

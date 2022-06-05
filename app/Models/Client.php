@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class Client extends Model
@@ -63,5 +65,14 @@ class Client extends Model
         }
         return $clients;
     }
+
+    public static function getAll(Request $request)
+    {
+        $page = $request->get('page', 1);
+        return Cache::remember('clients.' . $page, 60*60*24, function () {
+            return self::simplePaginate(50);
+        });
+    }
+
 
 }

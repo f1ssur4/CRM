@@ -6,13 +6,14 @@ use App\Http\Requests\ArtRequest;
 use App\Models\Art;
 use App\Models\Instructor;
 use App\Models\School;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ArtController extends Controller
 {
     public function index()
     {
-        return view('arts.index', ['arts' => Art::all()]);
+        Log::info('Showing all arts');
+        return view('arts.index', ['arts' => Art::getAll()]);
     }
 
     public function show($id)
@@ -27,7 +28,12 @@ class ArtController extends Controller
 
     public function add(ArtRequest $request)
     {
-        Art::create($request->validated());
-        return $this->returnWithMessage(config('messages.add_art_success'));
+        try {
+            Art::create($request->post());
+            return $this->returnWithMessage(config('messages.add_art_success'));
+        }catch (\Exception $exception){
+            Log::error(config('messages.add_art_error.add_art_error'), [$exception->getMessage()]);
+            return $this->returnWithMessage(config('messages.add_art_error'));
+        }
     }
 }

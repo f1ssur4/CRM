@@ -24,7 +24,7 @@ class ArtRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255|alpha',
+            'title' => 'required|max:255|string',
             'school_id' => 'required|numeric'
         ];
     }

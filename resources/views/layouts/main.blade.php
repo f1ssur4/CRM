@@ -24,17 +24,19 @@
                     @if(\Illuminate\Support\Facades\Gate::check('admin1') || \Illuminate\Support\Facades\Gate::check('admin2'))
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                     Worktable
                                 </a>
-
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="{{route('clients.add')}}">Add client</a></li>
                                     <li><a class="dropdown-item" href="{{route('arts.add')}}">Add art</a></li>
-                                    <li><a class="dropdown-item" href="{{route('instructors.add')}}">Add instructor</a></li>
+                                    <li><a class="dropdown-item" href="{{route('instructors.add')}}">Add instructor</a>
+                                    </li>
                                     <li><a class="dropdown-item" href="{{route('schools.add')}}">Add school</a></li>
                                     <li><a class="dropdown-item" href="{{route('statuses.add')}}">Add status</a></li>
-                                    <li><a class="dropdown-item" href="{{route('subscriptions.add')}}">Add subscription</a></li>
+                                    <li><a class="dropdown-item" href="{{route('subscriptions.add')}}">Add
+                                            subscription</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -51,7 +53,7 @@
                             <a class="nav-link" href="{{route('clients.index')}}">Clients</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('statistic.index')}}">Statistic</a>
+                            <a class="nav-link" href="{{route('statistics.index')}}">Statistics</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.create') }}">Create user</a>
@@ -77,7 +79,7 @@
                             </li>
                         </ul>
                     @else
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position: absolute; right: 10px">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position: absolute; right: 10px">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('users.login')}}">Login</a>
                             </li>
@@ -94,22 +96,22 @@
 </div>
 @section('bottom')
 
-<div id="copyright" class="botbar" style="position: fixed; bottom: 0; left: 0; width: 100%">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <p style="margin-left: 42%">&copy; Untitled. All rights reserved</p>
+    <div id="copyright" class="botbar" style="position: fixed; bottom: 0; left: 0; width: 100%">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <p style="margin-left: 42%">&copy; Untitled. All rights reserved</p>
+                </div>
             </div>
-        </div>
-    </nav>
-    </center>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+        </nav>
+        </center>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 @show
 </html>

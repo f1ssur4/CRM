@@ -6,6 +6,8 @@ use App\Events\ReadyTask;
 use App\Models\Task;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
+use MongoDB\Driver\Exception\ExecutionTimeoutException;
 
 class DeleteTask implements ShouldQueue
 {
@@ -32,6 +34,10 @@ class DeleteTask implements ShouldQueue
      */
     public function handle(ReadyTask $event)
     {
-        Task::destroy($event->taskId);
+        try {
+            Task::destroy($event->taskId);
+        }catch (\Exception $e){
+            Log::error(config('messages.error_autodestroy_task.error_autodestroy_task'), [$e->getMessage()]);
+        }
     }
 }

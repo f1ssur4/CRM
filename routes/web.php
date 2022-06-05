@@ -177,14 +177,14 @@ Route::name('lessons.')->group(function () {
 });
 
 
-Route::name('statistic.')->group(function () {
+Route::name('statistics.')->group(function () {
     Route::middleware(['auth', 'authorize'])->group(function () {
 
-        Route::get('/statistic', [StatisticController::class, 'index'])->name('index');
+        Route::get('/statistics', [StatisticController::class, 'index'])->name('index');
 
-        Route::get('/statistic/convert', [StatisticController::class, 'convert'])->name('convert');
+        Route::get('/statistics/convert', [StatisticController::class, 'convert'])->name('convert');
 
-        Route::get('/statistic/clean-off', [StatisticController::class, 'cleanOff'])->name('clean-off');
+        Route::get('/statistics/clean-off', [StatisticController::class, 'cleanOff'])->name('clean-off');
 
     });
 });

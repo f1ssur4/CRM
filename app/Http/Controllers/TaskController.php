@@ -7,6 +7,7 @@ use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -27,9 +28,14 @@ class TaskController extends Controller
 
     public function create(TaskRequest $taskRequest)
     {
-        return $taskRequest->validated()
-            ? $this->save($taskRequest)
-            : $this->returnWithMessage(config('messages.create_task_error'));
+        try {
+            return $taskRequest->validated()
+                ? $this->save($taskRequest)
+                : $this->returnWithMessage(config('messages.create_task_error'));
+        }catch (\Exception $exception){
+            Log::error(config('messages.create_task_error.create_task_error'), [$exception->getMessage()]);
+            return $this->returnWithMessage(config('messages.create_task_error'));
+        }
     }
 
     public function ready(Request $request)

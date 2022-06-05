@@ -9,6 +9,11 @@
             {{$message}}
         </div>
         @enderror
+        @error('add_subscription_error')
+        <div class="alert alert-danger">
+            {{$message}}
+        </div>
+        @enderror
         <form action="{{route('subscriptions.add')}}" method="post">
             @csrf
             <div style="width: 500px;">

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\InstructorRequest;
 use App\Http\Resources\InstructorResource;
 use App\Models\Instructor;
-use function response;
+use Illuminate\Support\Facades\Cache;
 
 class InstructorController extends Controller
 {
@@ -17,7 +17,9 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        return InstructorResource::collection(Instructor::all());
+        return InstructorResource::collection(Cache::remember('instructors', 60*60*24, function () {
+            return Instructor::all();
+        }));
     }
 
     /**

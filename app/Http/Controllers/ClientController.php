@@ -10,12 +10,13 @@ use App\Models\Instructor;
 use App\Models\Status;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('clients.index', ['clients' => Client::simplePaginate(10)]);
+        return view('clients.index', ['clients' => Client::getAll($request)]);
     }
 
     public function show($id)
@@ -23,14 +24,19 @@ class ClientController extends Controller
         return view('clients.show', [
             'client' => Client::findOrFail($id),
             'statuses' => Status::all(),
-            'subscriptions' => Subscription::all()
+            'subscriptions' => Subscription::getAll()
         ]);
     }
 
     public function update(ClientUpdateRequest $request)
     {
-        Client::edit($request->validated());
-        return $this->returnWithMessage(config('messages.update_client_success'));
+        try {
+            Client::edit($request->validated());
+            return $this->returnWithMessage(config('messages.update_client_success'));
+        }catch (\Exception $exception){
+            Log::error('error update client data', [$exception->getMessage()]);
+            return $this->returnWithMessage(config('messages.update_client_error'));
+        }
     }
 
     public function search(Request $request)
@@ -56,8 +62,13 @@ class ClientController extends Controller
 
     public function add(ClientRequest $request)
     {
-        Client::create($request->validated());
-        return $this->returnWithMessage(config('messages.add_client_success'));
+        try {
+            Client::create($request->validated());
+            return $this->returnWithMessage(config('messages.add_client_success'));
+        }catch (\Exception $exception){
+            Log::error(config('messages.add_client_error.add_client_error'), [$exception->getMessage()]);
+            return $this->returnWithMessage(config('messages.add_client_error'));
+        }
     }
 
     private function sendMailJob($subscriptionId, $request)

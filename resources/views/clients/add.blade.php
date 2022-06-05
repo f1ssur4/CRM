@@ -9,6 +9,11 @@
             {{$message}}
         </div>
         @enderror
+        @error('add_client_error')
+        <div class="alert alert-danger">
+            {{$message}}
+        </div>
+        @enderror
         <form action="{{route('clients.add')}}" method="post">
             @csrf
             <div style="width: 500px;">
@@ -81,6 +86,5 @@
             </div>
         </form>
     </div>
-
 @endsection
 

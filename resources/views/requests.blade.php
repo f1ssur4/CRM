@@ -37,6 +37,9 @@
         @error('delete_request_success')
         <div class="alert alert-success">{{$message}}</div>
         @enderror
+        @error('delete_request_error')
+        <div class="alert alert-danger">{{$message}}</div>
+        @enderror
     </div>
 
 @endsection

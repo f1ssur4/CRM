@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         School::factory(3)->create();
         Art::factory(10)->create();
         Instructor::factory(15)->create();
-        Client::factory(30)->create();
+        Client::factory(2000)->create();
         $this->call([UserSeeder::class]);
         $this->call([SubscriptionSeeder::class]);
         Statistics::factory(1)->create();

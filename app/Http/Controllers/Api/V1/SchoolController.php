@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SchoolRequest;
 use App\Http\Resources\SchoolResource;
 use App\Models\School;
+use Illuminate\Support\Facades\Cache;
 
 
 class SchoolController extends Controller
@@ -17,7 +18,9 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        return SchoolResource::collection(School::all());
+        return SchoolResource::collection(Cache::remember('schools', 60*60*24, function () {
+            return School::all();
+        }));
     }
 
     /**

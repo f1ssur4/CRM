@@ -15,17 +15,17 @@
             </thead>
             <tbody>
             <tr>
-                <td>@php echo $statistic[0]->subscriptions @endphp</td>
-                <td>@php echo $statistic[0]->lessons @endphp</td>
-                <td>@php echo $statistic[0]->income @endphp</td>
+                <td>@php echo $statistics[0]->subscriptions @endphp</td>
+                <td>@php echo $statistics[0]->lessons @endphp</td>
+                <td>@php echo $statistics[0]->income @endphp</td>
             </tr>
             </tbody>
         </table>
-        @error('statistic_cleanOff_success')
+        @error('statistics_cleanOff_success')
         <div class="alert alert-success">{{$message}}</div>
         @enderror
-        <a class="btn btn-primary" href="{{route('statistic.clean-off')}}">Clear statistics</a>
-        <a class="btn btn-primary" href='/statistic/convert'>Download statistics in PDF</a>
+        <a class="btn btn-primary" href="{{route('statistics.clean-off')}}">Clear statistics</a>
+        <a class="btn btn-primary" href='/statistics/convert'>Download statistics in PDF</a>
     </div>
 @endsection
 

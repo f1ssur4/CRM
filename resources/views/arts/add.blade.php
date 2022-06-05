@@ -9,6 +9,11 @@
             {{$message}}
         </div>
         @enderror
+        @error('add_art_error')
+        <div class="alert alert-danger">
+            {{$message}}
+        </div>
+        @enderror
         <form action="{{route('arts.add')}}" method="post">
             @csrf
             <div style="width: 500px;">

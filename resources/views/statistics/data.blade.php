@@ -12,9 +12,9 @@
             </thead>
             <tbody>
             <tr>
-                <td>@php echo $statistic[0]->subscriptions @endphp</td>
-                <td>@php echo $statistic[0]->lessons @endphp</td>
-                <td>@php echo $statistic[0]->income @endphp</td>
+                <td>@php echo $statistics[0]->subscriptions @endphp</td>
+                <td>@php echo $statistics[0]->lessons @endphp</td>
+                <td>@php echo $statistics[0]->income @endphp</td>
                 <td>@php echo date('y:M:d') @endphp</td>
             </tr>
             </tbody>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArtRequest;
 use App\Http\Resources\ArtResource;
 use App\Models\Art;
+use Illuminate\Support\Facades\Cache;
 
 class ArtController extends Controller
 {
@@ -16,7 +17,9 @@ class ArtController extends Controller
      */
     public function index()
     {
-        return ArtResource::collection(Art::all());
+        return ArtResource::collection(Cache::remember('arts', 60*60*24, function () {
+            return Art::all();
+        }));
     }
 
     /**

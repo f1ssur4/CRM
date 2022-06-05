@@ -6,13 +6,13 @@ use App\Http\Requests\InstructorUpdateRequest;
 use App\Http\Requests\InstructorRequest;
 use App\Models\Art;
 use App\Models\Instructor;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class InstructorController extends Controller
 {
     public function index()
     {
-        return view('instructors.index', ['instructors' => Instructor::all()]);
+        return view('instructors.index', ['instructors' => Instructor::getAll()]);
     }
 
     public function show($id)
@@ -35,7 +35,12 @@ class InstructorController extends Controller
 
     public function add(InstructorRequest $request)
     {
-        Instructor::create($request->validated());
-        return $this->returnWithMessage(config('messages.add_instructor_success'));
+        try {
+            Instructor::create($request->validated());
+            return $this->returnWithMessage(config('messages.add_instructor_success'));
+        }catch (\Exception $exception){
+            Log::error(config('messages.add_instructor_error.add_instructor_error'), [$exception->getMessage()]);
+            return $this->returnWithMessage(config('messages.add_instructor_error'));
+        }
     }
 }

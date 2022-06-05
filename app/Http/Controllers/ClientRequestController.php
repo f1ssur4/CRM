@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use \App\Models\ClientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ClientRequestController extends Controller
 {
@@ -14,7 +15,13 @@ class ClientRequestController extends Controller
 
     public function delete($id)
     {
-        ClientRequest::destroy($id);
-        return $this->returnWithMessage(config('messages.delete_request_success'));
+        try {
+            ClientRequest::destroy($id);
+            return $this->returnWithMessage(config('messages.delete_request_success'));
+        }catch (\Exception $exception){
+            Log::error(config('messages.delete_request_error.delete_request_error'), [$exception->getMessage()]);
+            return $this->returnWithMessage(config('messages.delete_request_error'));
+        }
+
     }
 }
